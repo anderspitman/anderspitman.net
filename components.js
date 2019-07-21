@@ -47,12 +47,12 @@ const Entry = (entry) => {
 
     iframe.onload = () => {
       const doc = iframe.contentWindow.document;
-      const link = doc.createElement('link');
-      link.setAttribute('rel', "stylesheet");
-      link.setAttribute('href', "/feeds/theme.css");
+      //const link = doc.createElement('link');
+      //link.setAttribute('rel', "stylesheet");
+      //link.setAttribute('href', "/feeds/theme.css");
 
-      const last = doc.head.childNodes[0];
-      doc.head.insertBefore(link, last);
+      //const last = doc.head.childNodes[0];
+      //doc.head.insertBefore(link, last);
 
       // The extra pixels are to avoid the scroll bars
       const iframeHeight = (doc.body.scrollHeight + (doc.body.scrollHeight * 0.01));
