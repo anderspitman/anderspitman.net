@@ -1,3 +1,5 @@
+
+
 const Main = (entries) => {
   const dom = document.createElement('div');
 
@@ -33,9 +35,34 @@ const Entry = (entry) => {
   const dom = document.createElement('div');
   dom.classList.add('entry');
 
+  const iframe = document.createElement('iframe');
+  iframe.classList.add('entry__iframe');
+
+  dom.appendChild(iframe);
+
   if (entry.metadata.format === 'html') {
-    const path = entry.rootDir + '/' + entry.name;
-    dom.innerHTML = entry.content.replace("src='", `src='${path}/`);
+
+    const path = entry.rootDir + '/' + entry.name + '/' + entry.metadata.contentFilename;
+    iframe.src = path;
+
+    iframe.onload = () => {
+      const doc = iframe.contentWindow.document;
+      const link = doc.createElement('link');
+      link.setAttribute('rel', "stylesheet");
+      link.setAttribute('href', "/feeds/theme.css");
+
+      const last = doc.head.childNodes[0];
+      doc.head.insertBefore(link, last);
+
+      // The extra pixels are to avoid the scroll bars
+      const iframeHeight = (doc.body.scrollHeight + (doc.body.scrollHeight * 0.01));
+      if (iframeHeight <= 500) {
+        iframe.style.height = iframeHeight + 'px';
+      }
+      else {
+        iframe.style.height = '300px';
+      }
+    };
   }
   else {
     throw new Error("invalid format");
