@@ -1,3 +1,12 @@
+
+marked.setOptions({
+  highlight: function(code, lang) {
+    const highlighted = hljs.highlightAuto(code).value;
+    return highlighted;
+  },
+});
+
+
 const MAX_ENTRY_HEIGHT = 300;
 
 const Main = (entries) => {
@@ -35,12 +44,11 @@ const Entry = (entry) => {
   const dom = document.createElement('div');
   dom.classList.add('entry');
 
-  const iframe = document.createElement('iframe');
-  iframe.classList.add('entry__iframe');
-
-  dom.appendChild(iframe);
-
   if (entry.metadata.format === 'html') {
+
+    const iframe = document.createElement('iframe');
+    iframe.classList.add('entry__iframe');
+    dom.appendChild(iframe);
 
     const path = entry.rootDir + '/' + entry.name + '/' + entry.metadata.contentFilename;
     iframe.src = path;
@@ -63,6 +71,10 @@ const Entry = (entry) => {
         iframe.style.height = MAX_ENTRY_HEIGHT + 'px';
       }
     };
+  }
+  else if (entry.metadata.format === 'github-flavored-markdown') {
+    console.log(marked);
+    dom.innerHTML = marked(entry.content);
   }
   else {
     throw new Error("invalid format");
