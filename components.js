@@ -1,4 +1,4 @@
-
+const MAX_ENTRY_HEIGHT = 300;
 
 const Main = (entries) => {
   const dom = document.createElement('div');
@@ -56,11 +56,11 @@ const Entry = (entry) => {
 
       // The extra pixels are to avoid the scroll bars
       const iframeHeight = (doc.body.scrollHeight + (doc.body.scrollHeight * 0.01));
-      if (iframeHeight <= 500) {
+      if (iframeHeight <= MAX_ENTRY_HEIGHT) {
         iframe.style.height = iframeHeight + 'px';
       }
       else {
-        iframe.style.height = '300px';
+        iframe.style.height = MAX_ENTRY_HEIGHT + 'px';
       }
     };
   }
