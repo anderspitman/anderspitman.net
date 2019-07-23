@@ -1,0 +1,63 @@
+html {
+  box-sizing: border-box;
+  font-size: 18px;
+  font-family: Courier, monospace;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  background-color: #222222;
+  color: #eeeeee;
+}
+
+a {
+    color: #DB8A00;
+}
+
+.main {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.entry {
+  border: 2px solid;
+  margin-bottom: 20px;
+  padding: 10px;
+  overflow: scroll;
+  max-height: 500px;
+}
+
+.entry__iframe {
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+/*
+.entry {
+  border: 1px solid;
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: .1s;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+*/
+
+.code-block {
+  background-color: #333333;
+  font-size: 16px;
+}
