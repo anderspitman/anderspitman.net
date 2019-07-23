@@ -1,8 +1,9 @@
 
 marked.setOptions({
   highlight: function(code, lang) {
-    const highlighted = hljs.highlightAuto(code).value;
-    return highlighted;
+    const highlighted = hljs.highlightAuto(code);
+    console.log(highlighted);
+    return `<div class='code-block'>${highlighted.value}</div>`;
   },
 });
 
