@@ -38,7 +38,7 @@ import { Main } from './components.js';
     entries.push(entry);
   }
 
-  console.log(entries);
+  //console.log(entries);
 
 
 
