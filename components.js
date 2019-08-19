@@ -45,6 +45,14 @@ const Entry = (entry) => {
   const dom = document.createElement('div');
   dom.classList.add('entry');
 
+  const entryHeader = document.createElement('div');
+  entryHeader.classList.add('entry__header');
+  dom.appendChild(entryHeader);
+
+  const entryContent = document.createElement('div');
+  entryContent.classList.add('entry__content');
+  dom.appendChild(entryContent);
+
   if (entry.metadata.format === 'html') {
 
     const iframe = document.createElement('iframe');
@@ -74,8 +82,8 @@ const Entry = (entry) => {
     };
   }
   else if (entry.metadata.format === 'github-flavored-markdown') {
-    console.log(marked);
-    dom.innerHTML = marked(entry.content);
+    entryHeader.innerHTML = `<h1>${entry.metadata.name}</h1>`;
+    entryContent.innerHTML = marked(entry.content);
   }
   else {
     throw new Error("invalid format");
