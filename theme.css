@@ -17,6 +17,11 @@ a {
     color: #DB8A00;
 }
 
+nav {
+  font-size: 42px;
+  font-weight: bold;
+}
+
 .main {
   max-width: 720px;
   margin: 0 auto;

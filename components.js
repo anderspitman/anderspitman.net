@@ -15,16 +15,50 @@ const Main = (entries) => {
 
   dom.classList.add('main');
 
-  dom.appendChild(Header());
-  dom.appendChild(Feed(entries));
+  const content = document.createElement('div');
+  content.classList.add('content');
 
-  dom.addEventListener('entry-fullscreen', (e) => {
-    while (dom.firstChild) {
-      dom.removeChild(dom.firstChild);
-    }
-    dom.appendChild(Entry(entries[e.detail.index]));
-    window.scrollTo(0, 0);
+  const navbar = Navbar();
+  navbar.addEventListener('home', () => {
+    removeAllChildren(content);
+    defaultRender();
   });
+  dom.appendChild(navbar);
+
+  function defaultRender() {
+    content.appendChild(FeedHeader());
+    content.appendChild(Feed(entries));
+
+    content.addEventListener('entry-fullscreen', (e) => {
+      while (content.firstChild) {
+        content.removeChild(content.firstChild);
+      }
+      content.appendChild(Entry(entries[e.detail.index]));
+      window.scrollTo(0, 0);
+    });
+
+    dom.appendChild(content);
+  }
+
+  defaultRender();
+  
+  return dom;
+};
+
+
+const Navbar = () => {
+  const dom = document.createElement('nav');
+
+  const homeButton = document.createElement('a');
+  homeButton.href = '/feeds/';
+  homeButton.textContent = "Home";
+  homeButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    dom.dispatchEvent(new CustomEvent('home', {
+      bubbles: true,
+    }));
+  });
+  dom.appendChild(homeButton);
 
   return dom;
 };
@@ -136,11 +170,17 @@ const Entry = (entry) => {
   return dom;
 };
 
-const Header = () => {
+const FeedHeader = () => {
   const h1 = document.createElement('h1');
   h1.innerHTML = "Feed";
   return h1;
 };
+
+function removeAllChildren(elem) {
+  while (elem.firstChild) {
+    elem.removeChild(elem.firstChild);
+  }
+}
 
 
 export {
