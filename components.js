@@ -23,6 +23,7 @@ const Main = (entries) => {
       dom.removeChild(dom.firstChild);
     }
     dom.appendChild(Entry(entries[e.detail.index]));
+    window.scrollTo(0, 0);
   });
 
   return dom;
@@ -39,7 +40,7 @@ const Feed = (entries) => {
   entries.forEach((e, index) => {
     const entry = document.createElement('div');
     entry.classList.add('entry-list__entry');
-    entry.appendChild(Entry(e));
+    entry.appendChild(ListEntry(e));
     list.appendChild(entry);
 
     entry.addEventListener('fullscreen', () => {
@@ -57,16 +58,16 @@ const Feed = (entries) => {
 };
 
 
-const Entry = (entry) => {
+const ListEntry = (entry) => {
   const dom = document.createElement('div');
-  dom.classList.add('entry');
+  dom.classList.add('list-entry');
 
   const entryControls = document.createElement('div');
-  entryControls.classList.add('entry__controls');
+  entryControls.classList.add('list-entry__controls');
   dom.appendChild(entryControls);
   entryControls.innerHTML = `
-    <button id='fullscreen-btn'>Fullscreen</button>
-    <button id='open-in-tab-btn'>Open in Tab</button>
+    <button id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</button>
+    <button id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</button>
   `;
   entryControls.querySelector('#fullscreen-btn')
     .addEventListener('click', () => {
@@ -77,6 +78,16 @@ const Entry = (entry) => {
         //},
       }));
     });
+
+  dom.appendChild(Entry(entry));
+
+  return dom;
+};
+
+
+const Entry = (entry) => {
+  const dom = document.createElement('div');
+  dom.classList.add('entry');
 
   const entryHeader = document.createElement('div');
   entryHeader.classList.add('entry__header');
@@ -127,7 +138,7 @@ const Entry = (entry) => {
 
 const Header = () => {
   const h1 = document.createElement('h1');
-  h1.innerHTML = "Feeds";
+  h1.innerHTML = "Feed";
   return h1;
 };
 
