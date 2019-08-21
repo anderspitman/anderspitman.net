@@ -41,6 +41,8 @@ const Main = (entries) => {
         content.removeChild(content.firstChild);
       }
       content.appendChild(Entry(entries[e.detail.index]));
+      //window.location.hash = `#!/${entries[e.detail.index].name}`;
+      window.history.pushState(null, null, entries[e.detail.index].name);
       window.scrollTo(0, 0);
     };
 
