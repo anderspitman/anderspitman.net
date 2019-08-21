@@ -17,10 +17,17 @@ const Main = (entries) => {
 
   const content = document.createElement('div');
   content.classList.add('content');
+  const contentListeners = [];
 
   const navbar = Navbar();
   navbar.addEventListener('home', () => {
+    // TODO: I don't really like this manual cleanup, and it's already caused
+    // one event listener memory leak. Maybe find a clean way to completely
+    // remove content and remake it.
     removeAllChildren(content);
+    contentListeners.forEach((listener) => {
+      content.removeEventListener('entry-fullscreen', listener);
+    });
     defaultRender();
   });
   dom.appendChild(navbar);
@@ -29,13 +36,16 @@ const Main = (entries) => {
     content.appendChild(FeedHeader());
     content.appendChild(Feed(entries));
 
-    content.addEventListener('entry-fullscreen', (e) => {
+    const listener = (e) => {
       while (content.firstChild) {
         content.removeChild(content.firstChild);
       }
       content.appendChild(Entry(entries[e.detail.index]));
       window.scrollTo(0, 0);
-    });
+    };
+
+    content.addEventListener('entry-fullscreen', listener);
+    contentListeners.push(listener);
 
     dom.appendChild(content);
   }
@@ -120,6 +130,9 @@ const ListEntry = (entry) => {
 
 
 const Entry = (entry) => {
+
+  //const start = performance.now();
+
   const dom = document.createElement('div');
   dom.classList.add('entry');
 
@@ -166,6 +179,8 @@ const Entry = (entry) => {
   else {
     throw new Error("invalid format");
   }
+
+  //const time = performance.now() - start;
   
   return dom;
 };
