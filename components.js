@@ -110,6 +110,7 @@ const ListEntry = (entry) => {
   entryControls.classList.add('list-entry__controls');
   dom.appendChild(entryControls);
   entryControls.innerHTML = `
+    <span>${entry.name}</span>
     <button id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</button>
     <button id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</button>
   `;

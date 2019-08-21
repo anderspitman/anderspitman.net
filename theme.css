@@ -36,6 +36,11 @@ nav {
   max-height: 300px;
 }
 
+.list-entry__controls {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .list-entry__control-btn {
   float: right;
   margin-left: 20px;
