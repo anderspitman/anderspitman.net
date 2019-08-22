@@ -1,3 +1,5 @@
+const MAX_ENTRY_HEIGHT = 300;
+const rootPath = '/feeds/';
 
 marked.setOptions({
   highlight: function(code, lang) {
@@ -7,53 +9,56 @@ marked.setOptions({
   },
 });
 
-
-const MAX_ENTRY_HEIGHT = 300;
-
 const Main = (entries) => {
+
   const dom = document.createElement('div');
-
   dom.classList.add('main');
-
-  const content = document.createElement('div');
-  content.classList.add('content');
-  const contentListeners = [];
 
   const navbar = Navbar();
   navbar.addEventListener('home', () => {
-    // TODO: I don't really like this manual cleanup, and it's already caused
-    // one event listener memory leak. Maybe find a clean way to completely
-    // remove content and remake it.
-    removeAllChildren(content);
-    contentListeners.forEach((listener) => {
-      content.removeEventListener('entry-fullscreen', listener);
-    });
-    defaultRender();
+    window.history.pushState({}, "", rootPath);
+    render();
   });
   dom.appendChild(navbar);
 
-  function defaultRender() {
-    content.appendChild(FeedHeader());
-    content.appendChild(Feed(entries));
+  function render() {
 
-    const listener = (e) => {
-      while (content.firstChild) {
-        content.removeChild(content.firstChild);
-      }
-      content.appendChild(Entry(entries[e.detail.index]));
-      //window.location.hash = `#!/${entries[e.detail.index].name}`;
-      window.history.pushState(null, null, entries[e.detail.index].name);
-      window.scrollTo(0, 0);
-    };
+    const oldContent = dom.querySelector('.content');
+    if (oldContent) {
+      dom.removeChild(oldContent);
+    }
 
-    content.addEventListener('entry-fullscreen', listener);
-    contentListeners.push(listener);
-
+    const content = document.createElement('div');
+    content.classList.add('content');
     dom.appendChild(content);
+
+    if (window.location.pathname === rootPath) {
+      content.appendChild(FeedHeader());
+      content.appendChild(Feed(entries));
+
+      const listener = (e) => {
+        window.history.pushState({}, "", entries[e.detail.index].name);
+        render();
+      };
+
+      content.addEventListener('entry-fullscreen', listener);
+    }
+    else {
+      const parts = window.location.pathname.split('/'); 
+      const entryName = parts[2];
+      const entry = entries.filter(entry => entry.name === entryName)[0];
+      content.appendChild(Entry(entry));
+    }
+
+    window.scrollTo(0, 0);
   }
 
-  defaultRender();
-  
+  window.addEventListener('popstate', (e) => {
+    render();
+  });
+
+  render();
+
   return dom;
 };
 
