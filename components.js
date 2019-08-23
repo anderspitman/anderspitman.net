@@ -1,5 +1,5 @@
 const MAX_ENTRY_HEIGHT = 300;
-const rootPath = '/feeds/';
+const entryNameOffset = config.rootPath.split('/').length - 1;
 
 marked.setOptions({
   highlight: function(code, lang) {
@@ -16,7 +16,7 @@ const Main = (entries) => {
 
   const navbar = Navbar();
   navbar.addEventListener('home', () => {
-    window.history.pushState({}, "", rootPath);
+    window.history.pushState({}, "", config.rootPath);
     render();
   });
   dom.appendChild(navbar);
@@ -32,7 +32,7 @@ const Main = (entries) => {
     content.classList.add('content');
     dom.appendChild(content);
 
-    if (window.location.pathname === rootPath) {
+    if (window.location.pathname === config.rootPath) {
       content.appendChild(FeedHeader());
       content.appendChild(Feed(entries));
 
@@ -40,7 +40,7 @@ const Main = (entries) => {
         //window.history.pushState({}, "", entries[e.detail.index].name);
         
         // set url based off index, in chronological order
-        window.history.pushState({}, "", entries.length - e.detail.index);
+        window.history.pushState({}, "", (entries.length - e.detail.index) + '/');
         render();
       };
 
@@ -50,7 +50,8 @@ const Main = (entries) => {
       const parts = window.location.pathname.split('/'); 
       //const entryName = parts[2];
       //const entry = entries.filter(entry => entry.name === entryName)[0];
-      const entryIndex = entries.length - parts[2];
+      const entryIndex = entries.length - parts[entryNameOffset];
+      console.log(entryIndex, entries);
       const entry = entries[entryIndex];
       content.appendChild(Entry(entry));
     }
@@ -72,7 +73,7 @@ const Navbar = () => {
   const dom = document.createElement('nav');
 
   const homeButton = document.createElement('a');
-  homeButton.href = '/feeds/';
+  homeButton.href = config.rootPath;
   homeButton.textContent = "Home";
   homeButton.addEventListener('click', (e) => {
     e.preventDefault();

@@ -4,21 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>remoose feeds</title>
-    <!--
-    <link rel="stylesheet" href="./normalize.css/normalize.css">
-    <link rel="stylesheet" href="./fontawesome/css/all.css">
-    <link rel="stylesheet" href="./styles.css">
-    -->
 
-    <link rel="stylesheet" href="/feeds/lib/highlightjs/styles/tomorrow-night.css">
-    <link rel="stylesheet" href="/feeds/theme.css">
+    <link rel="stylesheet" href="/lib/highlightjs/styles/tomorrow-night.css">
+    <link rel="stylesheet" href="/theme.css">
     
   </head>
 
   <body>
     <div id='root'></div>
-    <script src='/feeds/lib/marked/marked.js'></script>
-    <script src='/feeds/lib/highlightjs/highlight.pack.js'></script>
-    <script type='module' src='/feeds/index.js'></script>
+    <script>
+      const config = {
+        libHostAddress: 'http://localhost:9001',
+        rootPath: '/',
+      };
+    </script>
+    <script src='/lib/marked/marked.js'></script>
+    <script src='/lib/highlightjs/highlight.pack.js'></script>
+    <script type='module' src='/index.js'></script>
   </body>
 </html>

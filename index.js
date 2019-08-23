@@ -1,12 +1,14 @@
-import { ClientBuilder } from '/client/dist/bundle.esm.js';
+//import { ClientBuilder } from '/client/dist/bundle.esm.js';
+//import { ClientBuilder } from config.libHostAddress + '/client/dist/bundle.esm.js';
+
 import { Main } from './components.js';
 
-
 (async () => {
+  const { ClientBuilder } = await import(config.libHostAddress + '/client/dist/bundle.esm.js');
 
   const key = document.cookie.split('=')[1];
 
-  const rootDir = '/entries';
+  const rootDir = config.libHostAddress + '/entries';
 
   const result = await fetch(rootDir);
   const tree = await result.json();
