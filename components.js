@@ -37,7 +37,10 @@ const Main = (entries) => {
       content.appendChild(Feed(entries));
 
       const listener = (e) => {
-        window.history.pushState({}, "", entries[e.detail.index].name);
+        //window.history.pushState({}, "", entries[e.detail.index].name);
+        
+        // set url based off index, in chronological order
+        window.history.pushState({}, "", entries.length - e.detail.index);
         render();
       };
 
@@ -45,8 +48,10 @@ const Main = (entries) => {
     }
     else {
       const parts = window.location.pathname.split('/'); 
-      const entryName = parts[2];
-      const entry = entries.filter(entry => entry.name === entryName)[0];
+      //const entryName = parts[2];
+      //const entry = entries.filter(entry => entry.name === entryName)[0];
+      const entryIndex = entries.length - parts[2];
+      const entry = entries[entryIndex];
       content.appendChild(Entry(entry));
     }
 
