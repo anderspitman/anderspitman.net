@@ -1,0 +1,58 @@
+#!/bin/env node
+
+const process = require('process');
+const fs = require('fs');
+const path = require('path');
+const marked = require('./lib/marked/marked.js');
+
+const manifestPath = process.argv[2];
+const entryDir = process.argv[3];
+const outDir = process.argv[4];
+
+console.log(entryDir, outDir);
+
+try {
+  fs.readdirSync(outDir);
+}
+catch (e) {
+  fs.mkdirSync(outDir);
+}
+
+// TODO: shouldn't have children.entries.children hard-coded here
+const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+  .children.entries.children;
+console.log(manifest);
+
+
+//const items = fs.readdirSync(entryDir, { withFileTypes: true });
+
+//for (const item of items) {
+for (const itemName in manifest) {
+
+  const item = manifest[itemName];
+
+  const itemPath = path.join(entryDir, itemName);
+  //const stat = fs.statSync(itemPath);
+  
+  const entryPath = path.join(itemPath, 'entry.md');
+
+  const entryText = fs.readFileSync(entryPath, 'utf8');
+  const htmlText = marked(entryText);
+
+  const entryId = String(item.metadata.entryId);
+  console.log(entryId);
+
+  const entryOutDir = path.join(outDir, entryId);
+
+  try {
+    fs.readdirSync(entryOutDir);
+  }
+  catch (e) {
+    fs.mkdirSync(entryOutDir);
+  }
+
+  const entryOutPath = path.join(entryOutDir, 'index.html');
+
+  fs.writeFileSync(entryOutPath, htmlText);
+}
+       
