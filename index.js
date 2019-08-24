@@ -54,7 +54,8 @@ import { Navbar, FeedHeader, Feed, Entry } from './components.js';
 
       for (const name of sortedNames) {
 
-        const entryId = tree.children[name].metadata.entryId;
+        const metadata = tree.children[name].metadata;
+        const entryId = metadata.entryId;
 
         if (state.entries[entryId] === undefined) {
 
@@ -63,10 +64,9 @@ import { Navbar, FeedHeader, Feed, Entry } from './components.js';
             rootDir,
           };
 
-          let result = await fetch(rootDir + '/' + name + '/metadata.json');
-          entry.metadata = await result.json();
+          entry.metadata = metadata;
 
-          result = await fetch(rootDir + '/' + name + '/' + entry.metadata.contentFilename);
+          const result = await fetch(rootDir + '/' + name + '/' + entry.metadata.contentFilename);
           entry.content = await result.text();
 
           state.entries[entryId] = entry;
@@ -105,16 +105,17 @@ import { Navbar, FeedHeader, Feed, Entry } from './components.js';
         };
 
         let entryName = null;
+        let metadata = null;
         for (const key in tree.children) {
           const entry = tree.children[key];
           if (entry.metadata.entryId === entryId) {
             entryName = key;
+            metadata = entry.metadata;
           }
         }
 
-        let result = await fetch(rootDir + '/' + entryName + '/metadata.json');
-        entry.metadata = await result.json();
-        result = await fetch(rootDir + '/' + entryName + '/' + entry.metadata.contentFilename);
+        entry.metadata = metadata;
+        const result = await fetch(rootDir + '/' + entryName + '/' + entry.metadata.contentFilename);
         entry.content = await result.text();
 
         state.entries[entryId] = entry;
