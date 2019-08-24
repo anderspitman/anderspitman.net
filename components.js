@@ -1,5 +1,4 @@
 const MAX_ENTRY_HEIGHT = 300;
-const entryNameOffset = config.rootPath.split('/').length - 1;
 
 marked.setOptions({
   highlight: function(code, lang) {
@@ -8,65 +7,6 @@ marked.setOptions({
     return `<div class='code-block'>${highlighted.value}</div>`;
   },
 });
-
-const Main = (entries) => {
-
-  const dom = document.createElement('div');
-  dom.classList.add('main');
-
-  const navbar = Navbar();
-  navbar.addEventListener('home', () => {
-    window.history.pushState({}, "", config.rootPath);
-    render();
-  });
-  dom.appendChild(navbar);
-
-  function render() {
-
-    const oldContent = dom.querySelector('.content');
-    if (oldContent) {
-      dom.removeChild(oldContent);
-    }
-
-    const content = document.createElement('div');
-    content.classList.add('content');
-    dom.appendChild(content);
-
-    if (window.location.pathname === config.rootPath) {
-      content.appendChild(FeedHeader());
-      content.appendChild(Feed(entries));
-
-      const listener = (e) => {
-        //window.history.pushState({}, "", entries[e.detail.index].name);
-        
-        // set url based off index, in chronological order
-        window.history.pushState({}, "", (entries.length - e.detail.index) + '/');
-        render();
-      };
-
-      content.addEventListener('entry-fullscreen', listener);
-    }
-    else {
-      const parts = window.location.pathname.split('/'); 
-      //const entryName = parts[2];
-      //const entry = entries.filter(entry => entry.name === entryName)[0];
-      const entryIndex = entries.length - parts[entryNameOffset];
-      console.log(entryIndex, entries);
-      const entry = entries[entryIndex];
-      content.appendChild(Entry(entry));
-    }
-
-    window.scrollTo(0, 0);
-  }
-
-  window.addEventListener('popstate', (e) => {
-    render();
-  });
-
-  render();
-
-  return dom;
-};
 
 
 const Navbar = () => {
@@ -213,6 +153,5 @@ function removeAllChildren(elem) {
 
 
 export {
-  Main,
-  Feed,
+  Navbar, FeedHeader, Feed, Entry,
 };
