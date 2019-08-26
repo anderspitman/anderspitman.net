@@ -1,7 +1,8 @@
 //import { ClientBuilder } from '/client/dist/bundle.esm.js';
 //import { ClientBuilder } from config.remooseRoot + '/client/dist/bundle.esm.js';
 
-import { Navbar, About, FeedHeader, Feed, Entry } from './components.js';
+import { Navbar, FeedHeader, Feed, Entry } from './components.js';
+import { About } from './about.js';
 
 (async () => {
   const { ClientBuilder } = await import(config.remooseRoot + '/client/dist/bundle.esm.js');
