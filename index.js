@@ -98,7 +98,14 @@ import { About } from './about.js';
         
         // set url based off index, in chronological order
         // TODO: make sure entryList is still valid when this callback is invoked
-        window.history.pushState({}, "", config.rootPath + (entryList.length - e.detail.index) + '/');
+        const index = e.detail.index;
+        let path = config.rootPath + (entryList.length - index) + '/';
+
+        if (entryList[index].metadata.urlName) {
+          path += entryList[index].metadata.urlName + '/';
+        }
+
+        window.history.pushState({}, "", path);
         navigate();
       };
 

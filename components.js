@@ -89,7 +89,14 @@ const ListEntry = (entry) => {
   const entryControls = document.createElement('div');
   entryControls.classList.add('list-entry__controls');
   dom.appendChild(entryControls);
-  const entryUrl = config.rootPath + entry.metadata.entryId;
+
+  let path = config.rootPath + entry.metadata.entryId + '/';
+
+  if (entry.metadata.urlName) {
+    path += entry.metadata.urlName + '/';
+  }
+
+  const entryUrl = path;
   entryControls.innerHTML = `
     <span>${entry.name}</span>
     <a href='${entryUrl}' target='_blank' id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</a>
