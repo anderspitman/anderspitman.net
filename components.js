@@ -66,7 +66,7 @@ const ListEntry = (entry) => {
   entryControls.innerHTML = `
     <span>${entry.name}</span>
     <a href='${entryUrl}' target='_blank' id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</a>
-    <a href='' id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</a>
+    <a href='${entryUrl}' id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</a>
   `;
   entryControls.querySelector('#fullscreen-btn')
     .addEventListener('click', (e) => {
