@@ -28,12 +28,14 @@ const About = () => {
         <a target="_blank" href="https://twitter.com/anderspitman">Twitter</a>
       </section>
 
+      <!--
       <p>
         Note: The background visualization is actually a bit cooler than it
         looks. The code is pulled live from my public GitHub contributions. You
         can learn more about it
         <a target='_blank' href='/projects/redpill'>here</a>.
       </p>
+      -->
     </div>
     <!-- creates space so background visualization continues past content -->
     <div class='spacer'></div>
