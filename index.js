@@ -1,7 +1,7 @@
 //import { ClientBuilder } from '/client/dist/bundle.esm.js';
 //import { ClientBuilder } from config.libHostAddress + '/client/dist/bundle.esm.js';
 
-import { Navbar, FeedHeader, Feed, Entry } from './components.js';
+import { Navbar, About, FeedHeader, Feed, Entry } from './components.js';
 
 (async () => {
   const { ClientBuilder } = await import(config.libHostAddress + '/client/dist/bundle.esm.js');
@@ -33,13 +33,17 @@ import { Navbar, FeedHeader, Feed, Entry } from './components.js';
   dom.classList.add('main');
 
   const navbar = Navbar();
-  navbar.addEventListener('home', () => {
-    window.history.pushState({}, "", config.rootPath);
-    render();
+  navbar.addEventListener('feed', () => {
+    window.history.pushState({}, "", config.rootPath + 'feed/');
+    navigate();
+  });
+  navbar.addEventListener('about', () => {
+    window.history.pushState({}, "", config.rootPath + 'about/');
+    navigate();
   });
   dom.appendChild(navbar);
 
-  async function render() {
+  async function navigate() {
 
     const oldContent = dom.querySelector('.content');
     if (oldContent) {
@@ -51,6 +55,10 @@ import { Navbar, FeedHeader, Feed, Entry } from './components.js';
     dom.appendChild(content);
 
     if (window.location.pathname === config.rootPath) {
+      window.history.pushState({}, "", config.rootPath + 'feed/');
+      navigate();
+    }
+    else if (window.location.pathname === config.rootPath + 'feed/') {
 
       for (const name of sortedNames) {
 
@@ -86,11 +94,14 @@ import { Navbar, FeedHeader, Feed, Entry } from './components.js';
         
         // set url based off index, in chronological order
         // TODO: make sure entryList is still valid when this callback is invoked
-        window.history.pushState({}, "", (entryList.length - e.detail.index) + '/');
-        render();
+        window.history.pushState({}, "", config.rootPath + (entryList.length - e.detail.index) + '/');
+        navigate();
       };
 
       content.addEventListener('entry-fullscreen', listener);
+    }
+    else if (window.location.pathname === '/about/') {
+      content.appendChild(About());
     }
     else {
 
@@ -128,10 +139,10 @@ import { Navbar, FeedHeader, Feed, Entry } from './components.js';
   }
 
   window.addEventListener('popstate', (e) => {
-    render();
+    navigate();
   });
 
-  render();
+  navigate();
 
 
   const root = document.getElementById('root');
