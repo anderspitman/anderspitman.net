@@ -1,8 +1,9 @@
 //import { ClientBuilder } from '/client/dist/bundle.esm.js';
 //import { ClientBuilder } from config.remooseRoot + '/client/dist/bundle.esm.js';
 
-import { Navbar, FeedHeader, Feed, Entry } from './components.js';
-import { About } from './about.js';
+import { Navbar, FeedHeader, Feed, Entry } from './components/core.js';
+import { Tutorials } from './components/tutorials.js';
+import { About } from './components/about.js';
 //import { Rainer } from './lib/redpill/index.js';
 
 
@@ -38,6 +39,10 @@ import { About } from './about.js';
   const navbar = Navbar();
   navbar.addEventListener('feed', () => {
     window.history.pushState({}, "", config.rootPath + 'feed/');
+    navigate();
+  });
+  navbar.addEventListener('tutorials', () => {
+    window.history.pushState({}, "", config.rootPath + 'tutorials/');
     navigate();
   });
   navbar.addEventListener('about', () => {
@@ -110,6 +115,9 @@ import { About } from './about.js';
       };
 
       content.addEventListener('entry-fullscreen', listener);
+    }
+    else if (window.location.pathname === '/tutorials/') {
+      content.appendChild(Tutorials());
     }
     else if (window.location.pathname === '/about/') {
       content.appendChild(About());

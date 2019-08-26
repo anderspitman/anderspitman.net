@@ -36,6 +36,18 @@ const Navbar = () => {
   });
   dom.appendChild(feedButton);
 
+  const tutorialsButton = document.createElement('a');
+  tutorialsButton.classList.add('nav-btn');
+  tutorialsButton.href = config.rootPath + 'tutorials/';
+  tutorialsButton.textContent = "Tutorials";
+  tutorialsButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    dom.dispatchEvent(new CustomEvent('tutorials', {
+      bubbles: true,
+    }));
+  });
+  dom.appendChild(tutorialsButton);
+
   const aboutButton = document.createElement('a');
   aboutButton.classList.add('nav-btn');
   aboutButton.href = config.rootPath + 'about/';
@@ -47,7 +59,7 @@ const Navbar = () => {
     }));
   });
   dom.appendChild(aboutButton);
-  
+
   return dom;
 };
 
