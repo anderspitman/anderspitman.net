@@ -62,13 +62,17 @@ const ListEntry = (entry) => {
   const entryControls = document.createElement('div');
   entryControls.classList.add('list-entry__controls');
   dom.appendChild(entryControls);
+  const entryUrl = window.location + entry.metadata.entryId;
   entryControls.innerHTML = `
     <span>${entry.name}</span>
-    <button id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</button>
-    <button id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</button>
+    <a href='${entryUrl}' target='_blank' id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</a>
+    <a href='' id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</a>
   `;
   entryControls.querySelector('#fullscreen-btn')
-    .addEventListener('click', () => {
+    .addEventListener('click', (e) => {
+
+      e.preventDefault();
+
       dom.dispatchEvent(new CustomEvent('fullscreen', {
         bubbles: true,
         //detail: {
