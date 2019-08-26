@@ -5,12 +5,15 @@ html {
 }
 *, *:before, *:after {
   box-sizing: inherit;
+  --bg-color: rgba(20, 20, 20, 1.0);
 }
 
 body {
   margin: 0;
-  background-color: #222222;
-  color: #eeeeee;
+  /*background-color: #222222;*/
+  background-color: var(--bg-color);
+  /*color: #eeeeee;*/
+  color: #ddd;
 }
 
 a {
@@ -18,8 +21,13 @@ a {
 }
 
 nav {
-  font-size: 42px;
+  font-size: 1.4em;
   font-weight: bold;
+  margin-bottom: 20px;
+}
+
+pre {
+    overflow-x: scroll;
 }
 
 .nav-btn {
@@ -27,8 +35,19 @@ nav {
 }
 
 .main {
-  max-width: 720px;
+  max-width: 650px;
   margin: 0 auto;
+  line-height: 1.5;
+  font-size: 20px;
+}
+
+.portrait img {
+    border-radius: 50%;
+}
+
+.portrait {
+    width: 30%;
+    margin: 0 auto;
 }
 
 .list-entry {
@@ -83,5 +102,5 @@ nav {
 
 .code-block {
   background-color: #333333;
-  font-size: 16px;
+  font-size: 0.8em;
 }

@@ -1,10 +1,10 @@
 //import { ClientBuilder } from '/client/dist/bundle.esm.js';
-//import { ClientBuilder } from config.libHostAddress + '/client/dist/bundle.esm.js';
+//import { ClientBuilder } from config.remooseRoot + '/client/dist/bundle.esm.js';
 
 import { Navbar, About, FeedHeader, Feed, Entry } from './components.js';
 
 (async () => {
-  const { ClientBuilder } = await import(config.libHostAddress + '/client/dist/bundle.esm.js');
+  const { ClientBuilder } = await import(config.remooseRoot + '/client/dist/bundle.esm.js');
 
   const state = {
     entries: {},
@@ -12,7 +12,7 @@ import { Navbar, About, FeedHeader, Feed, Entry } from './components.js';
 
   const key = document.cookie.split('=')[1];
 
-  const rootDir = config.libHostAddress + '/entries';
+  const rootDir = config.remooseRoot + '/entries';
 
   const result = await fetch(rootDir);
   const tree = await result.json();
@@ -81,7 +81,8 @@ import { Navbar, About, FeedHeader, Feed, Entry } from './components.js';
         }
       }
 
-      content.appendChild(FeedHeader());
+      //content.appendChild(FeedHeader());
+
       const entryList = Object.keys(state.entries)
         .sort()
         .reverse()

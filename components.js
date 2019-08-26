@@ -56,7 +56,7 @@ const About = () => {
   dom.innerHTML = `
     <div id='portrait-container'>
       <div class='portrait'>
-        <img src="{{portrait_url}}" width="100%" alt="profile portrait">
+        <img src="${config.remooseRoot + '/assets/images/portrait.jpg'}" width="100%" alt="profile portrait">
       </div>
     </div>
     <div class='text-content semi-transparent'>
@@ -74,10 +74,10 @@ const About = () => {
       </p>
 
       <section class='contact-links'>
-        <a href="https://github.com/anderspitman">GitHub</a>
-        <a href="https://stackoverflow.com/users/943814/anderspitman">StackOverflow</a>
-        <a href="https://www.linkedin.com/in/anderspitman/">LinkedIn</a>
-        <a href="https://twitter.com/anderspitman">Twitter</a>
+        <a target="_blank" href="https://github.com/anderspitman">GitHub</a>
+        <a target="_blank" href="https://stackoverflow.com/users/943814/anderspitman">StackOverflow</a>
+        <a target="_blank" href="https://www.linkedin.com/in/anderspitman/">LinkedIn</a>
+        <a target="_blank" href="https://twitter.com/anderspitman">Twitter</a>
       </section>
 
       <p>
