@@ -66,28 +66,10 @@ import { About } from './components/about.js';
       window.history.pushState({}, "", config.rootPath + 'feed/');
       navigate();
     }
-    else if (window.location.pathname === config.rootPath + 'feed/') {
+    else if (window.location.pathname === config.rootPath + 'feed/' ||
+             window.location.pathname === '/tutorials/') {
 
-      for (const name of sortedNames) {
-
-        const metadata = tree.children[name].metadata;
-        const entryId = metadata.entryId;
-
-        if (state.entries[entryId] === undefined) {
-
-          const entry = {
-            name,
-            rootDir,
-          };
-
-          entry.metadata = metadata;
-
-          const result = await fetch(rootDir + '/' + name + '/' + entry.metadata.contentFilename);
-          entry.content = await result.text();
-
-          state.entries[entryId] = entry;
-        }
-      }
+      await fetchMissingEntries();
 
       //content.appendChild(FeedHeader());
 
@@ -95,8 +77,6 @@ import { About } from './components/about.js';
         .sort()
         .reverse()
         .map(entryId => state.entries[entryId]);
-
-      content.appendChild(Feed(entryList));
 
       const listener = (e) => {
         //window.history.pushState({}, "", entries[e.detail.index].name);
@@ -115,9 +95,20 @@ import { About } from './components/about.js';
       };
 
       content.addEventListener('entry-fullscreen', listener);
-    }
-    else if (window.location.pathname === '/tutorials/') {
-      content.appendChild(Tutorials());
+
+      if (window.location.pathname === config.rootPath + 'feed/') {
+
+        content.appendChild(Feed(entryList));
+      }
+      else if (window.location.pathname === '/tutorials/') {
+
+        const tutorials = entryList
+          .filter(e => e.tags && e.tags.indexOf('tutorial') > -1);
+
+        console.log(tutorials);
+
+        content.appendChild(Tutorials(tutorials));
+      }
     }
     else if (window.location.pathname === '/about/') {
       content.appendChild(About());
@@ -127,28 +118,19 @@ import { About } from './components/about.js';
       const parts = window.location.pathname.split('/'); 
 
       const entryId = parseInt(parts[entryNameOffset], 10);
+      const index = sortedNames.length - entryId;
 
       if (state.entries[entryId] === undefined) {
-        const entry = {
-          name,
-          rootDir,
-        };
 
-        let entryName = null;
-        let metadata = null;
+        let entryName;
         for (const key in tree.children) {
           const entry = tree.children[key];
           if (entry.metadata.entryId === entryId) {
             entryName = key;
-            metadata = entry.metadata;
           }
         }
 
-        entry.metadata = metadata;
-        const result = await fetch(rootDir + '/' + entryName + '/' + entry.metadata.contentFilename);
-        entry.content = await result.text();
-
-        state.entries[entryId] = entry;
+        await fetchEntry(entryName, index);
       }
 
       content.appendChild(Entry(state.entries[entryId]));
@@ -166,6 +148,47 @@ import { About } from './components/about.js';
 
   const root = document.getElementById('root');
   root.appendChild(dom);
+
+
+  async function fetchEntry(name, index) {
+    const metadata = tree.children[name].metadata;
+    const entryId = metadata.entryId;
+
+    if (state.entries[entryId] === undefined) {
+
+      const tags = tree.children[name].tags;
+
+      let path = config.rootPath + (sortedNames.length - index) + '/';
+
+      if (metadata.urlName) {
+        path += metadata.urlName + '/';
+      }
+
+      const entry = {
+        name,
+        rootDir,
+        path,
+        entryId,
+        metadata,
+        tags,
+        index,
+      };
+
+      const result = await fetch(rootDir + '/' + name + '/' + entry.metadata.contentFilename);
+      entry.content = await result.text();
+
+      state.entries[entryId] = entry;
+    }
+  }
+
+  async function fetchMissingEntries() {
+
+    //for (const name of sortedNames) {
+    for (let i = 0; i < sortedNames.length; i++) {
+      const name = sortedNames[i];
+      await fetchEntry(name, i);
+    }
+  }
 
   //// render background visualization
   //const theme = {
