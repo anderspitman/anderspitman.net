@@ -41,6 +41,10 @@ pre {
   font-size: 20px;
 }
 
+.contact-links a {
+    display: block;
+}
+
 .portrait img {
     border-radius: 50%;
 }
@@ -52,7 +56,7 @@ pre {
 
 .list-entry {
   border: 2px solid;
-  margin-bottom: 20px;
+  margin-bottom: 64px;
   padding: 10px;
   /*overflow: scroll;*/
   overflow: hidden;
@@ -103,4 +107,15 @@ pre {
 .code-block {
   background-color: #333333;
   font-size: 0.8em;
+}
+
+#rain-container {
+  position: absolute;
+  /*height: 100%;*/
+  z-index: -1000;
+}
+
+
+.semi-transparent {
+  background-color: rgba(20, 20, 20, 0.9);
 }

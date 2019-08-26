@@ -1,6 +1,3 @@
-//import { Rainer } from './lib/redpill/index.js';
-
-
 const About = () => {
   const dom = document.createElement('div');
 
@@ -32,9 +29,9 @@ const About = () => {
       </section>
 
       <p>
-        Note: The background visualization is even a bit cooler than it looks. The
-        code is actually pulled live from my public GitHub contributions. You can
-        learn more about it
+        Note: The background visualization is actually a bit cooler than it
+        looks. The code is pulled live from my public GitHub contributions. You
+        can learn more about it
         <a target='_blank' href='/projects/redpill'>here</a>.
       </p>
     </div>

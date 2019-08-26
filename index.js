@@ -3,6 +3,8 @@
 
 import { Navbar, FeedHeader, Feed, Entry } from './components.js';
 import { About } from './about.js';
+import { Rainer } from './lib/redpill/index.js';
+
 
 (async () => {
   const { ClientBuilder } = await import(config.remooseRoot + '/client/dist/bundle.esm.js');
@@ -149,6 +151,34 @@ import { About } from './about.js';
 
   const root = document.getElementById('root');
   root.appendChild(dom);
+
+  // render background visualization
+  const theme = {
+    fontFamily: 'Courier New',
+    fontSize: 18,
+    fontWeight: 'bold',
+    fontColor: '#26a750',
+    backgroundColor: 'rgba(20, 20, 20, 1.0)',
+  };
+
+  const rainEl = document.getElementById('rain-container');
+  const dim = document.body.getBoundingClientRect();
+  console.log(dim);
+  rainEl.style.width = dim.width + 'px';
+  //rainEl.style.height = dim.height + 'px';
+  rainEl.style.height = 1200 + 'px';
+
+  if (dim.width < 650) {
+    theme.fontSize = 10;
+  }
+
+  const rainer = new Rainer({
+    sourceType: 'github',
+    githubUsername: 'anderspitman',
+    domElementId: 'rain-container',
+    theme,
+  });
+
 
   //const client = await new ClientBuilder()
   //  .authKey(key)

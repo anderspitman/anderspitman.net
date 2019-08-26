@@ -11,6 +11,7 @@ marked.setOptions({
 
 const Navbar = () => {
   const dom = document.createElement('nav');
+  dom.classList.add('semi-transparent');
 
   //const homeButton = document.createElement('a');
   //homeButton.href = config.rootPath;
@@ -83,11 +84,12 @@ const Feed = (entries) => {
 const ListEntry = (entry) => {
   const dom = document.createElement('div');
   dom.classList.add('list-entry');
+  dom.classList.add('semi-transparent');
 
   const entryControls = document.createElement('div');
   entryControls.classList.add('list-entry__controls');
   dom.appendChild(entryControls);
-  const entryUrl = window.location + entry.metadata.entryId;
+  const entryUrl = config.rootPath + entry.metadata.entryId;
   entryControls.innerHTML = `
     <span>${entry.name}</span>
     <a href='${entryUrl}' target='_blank' id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</a>
@@ -118,6 +120,7 @@ const Entry = (entry) => {
 
   const dom = document.createElement('div');
   dom.classList.add('entry');
+  dom.classList.add('semi-transparent');
 
   const entryHeader = document.createElement('div');
   entryHeader.classList.add('entry__header');
