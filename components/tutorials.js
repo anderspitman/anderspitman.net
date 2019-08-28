@@ -7,7 +7,7 @@ const Tutorials = (tutList) => {
     const li = document.createElement('li');
     const a = document.createElement('a');
     a.setAttribute('href', tut.path);
-    a.innerHTML = tut.name + " | <strong>" + tut.metadata.name + "</strong>";
+    a.innerHTML = tut.name + " | <strong>" + tut.metadata.title + "</strong>";
 
     a.addEventListener('click', (e) => {
       e.preventDefault();
