@@ -3,3 +3,5 @@
 * Preload portrait image
 * Add button to disable visualization
 * Cache dom elements when switching pages
+* Use entryId, not index, for entry URLs
+* Tutorial page doesn't need entries necessarily

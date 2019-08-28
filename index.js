@@ -83,7 +83,7 @@ import { About } from './components/about.js';
         .reverse()
         .map(entryId => state.entries[entryId]);
 
-      const listener = (e) => {
+      const fullscreenListener = (e) => {
         //window.history.pushState({}, "", entries[e.detail.index].name);
         
         // set url based off index, in chronological order
@@ -99,7 +99,7 @@ import { About } from './components/about.js';
         navigate();
       };
 
-      content.addEventListener('entry-fullscreen', listener);
+      content.addEventListener('entry-fullscreen', fullscreenListener);
 
       if (window.location.pathname === config.rootPath + 'feed/') {
 
