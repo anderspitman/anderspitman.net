@@ -28,6 +28,8 @@ nav {
 
 pre {
     overflow-x: scroll;
+    background-color: #333333;
+    font-size: 0.8em;
 }
 
 .nav-btn {
@@ -99,11 +101,6 @@ pre {
   100% {
     opacity: 1;
   }
-}
-
-.code-block {
-  background-color: #333333;
-  font-size: 0.8em;
 }
 
 #rain-container {
