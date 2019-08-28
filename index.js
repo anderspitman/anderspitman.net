@@ -75,7 +75,11 @@ import { About } from './components/about.js';
       //content.appendChild(FeedHeader());
 
       const entryList = Object.keys(state.entries)
-        .sort()
+        .sort((a, b) => {
+          if (a.name < b.name) return -1;
+          if (a.name > b.name) return 1;
+          return 0;
+        })
         .reverse()
         .map(entryId => state.entries[entryId]);
 
