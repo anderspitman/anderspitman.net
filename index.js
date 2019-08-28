@@ -12,6 +12,7 @@ import { About } from './components/about.js';
 
   const state = {
     entries: {},
+    promiseEntries: [],
   };
 
   const key = document.cookie.split('=')[1];
@@ -22,14 +23,15 @@ import { About } from './components/about.js';
   const result = await fetch(rootDir);
   const tree = await result.json();
 
-  console.log(tree);
+  //console.log(tree);
 
   // sort in reverse-chronological order
-  let sortedNames = Object.keys(tree.children)
+  const sortedNames = Object.keys(tree.children)
     .sort()
     .reverse();
 
-  console.log(sortedNames);
+  const sortedEntries = sortedNames
+    .map(name => tree.children[name]);
 
 
   const entryNameOffset = config.rootPath.split('/').length - 1;
@@ -70,29 +72,15 @@ import { About } from './components/about.js';
     else if (window.location.pathname === config.rootPath + 'feed/' ||
              window.location.pathname === '/tutorials/') {
 
-      await fetchMissingEntries();
-
-      //content.appendChild(FeedHeader());
-
-      const entryList = Object.keys(state.entries)
-        .sort((a, b) => {
-          if (a.name < b.name) return -1;
-          if (a.name > b.name) return 1;
-          return 0;
-        })
-        .reverse()
-        .map(entryId => state.entries[entryId]);
+      fetchMissingEntries();
 
       const fullscreenListener = (e) => {
-        //window.history.pushState({}, "", entries[e.detail.index].name);
-        
-        // set url based off index, in chronological order
-        // TODO: make sure entryList is still valid when this callback is invoked
-        const index = e.detail.index;
-        let path = config.rootPath + (entryList.length - index) + '/';
 
-        if (entryList[index].metadata.urlName) {
-          path += entryList[index].metadata.urlName + '/';
+        const entryMeta = e.detail.entryMeta;
+        let path = config.rootPath + (entryMeta.metadata.entryId + '/');
+
+        if (entryMeta.metadata.urlName) {
+          path += entryMeta.metadata.urlName + '/';
         }
 
         window.history.pushState({}, "", path);
@@ -103,16 +91,23 @@ import { About } from './components/about.js';
 
       if (window.location.pathname === config.rootPath + 'feed/') {
 
-        content.appendChild(Feed(entryList));
+        content.appendChild(Feed(state.promiseEntries));
       }
       else if (window.location.pathname === '/tutorials/') {
 
-        const tutorials = entryList
+        const tutorials = sortedEntries
           .filter(e => e.tags && e.tags.indexOf('tutorial') > -1);
 
-        console.log(tutorials);
+        const tutorialPromises = [];
+        for (let i = 0; i < sortedEntries.length; i++) {
+          const entryMeta = sortedEntries[i];
 
-        content.appendChild(Tutorials(tutorials));
+          if (entryMeta.tags && entryMeta.tags.indexOf('tutorial') > -1) {
+            tutorialPromises.push(state.promiseEntries[i]);
+          }
+        }
+
+        content.appendChild(Tutorials(tutorialPromises));
       }
     }
     else if (window.location.pathname === '/about/') {
@@ -123,22 +118,26 @@ import { About } from './components/about.js';
       const parts = window.location.pathname.split('/'); 
 
       const entryId = parseInt(parts[entryNameOffset], 10);
-      const index = sortedNames.length - entryId;
 
-      if (state.entries[entryId] === undefined) {
+      let index;
+      let entryName;
+      let entryMeta;
 
-        let entryName;
-        for (const key in tree.children) {
-          const entry = tree.children[key];
-          if (entry.metadata.entryId === entryId) {
-            entryName = key;
-          }
+      for (let i = 0; i < sortedEntries.length; i++) {
+
+        const entry = sortedEntries[i];
+
+        if (entry.metadata.entryId === entryId) {
+          index = i;
+          entryName = sortedNames[i];
+          entryMeta = entry;
         }
-
-        await fetchEntry(entryName, index);
       }
 
-      content.appendChild(Entry(state.entries[entryId]));
+      fetchEntry(entryName, entryMeta, index);
+      const entry = await state.promiseEntries[index];
+
+      content.appendChild(Entry(entry));
     }
 
     window.scrollTo(0, 0);
@@ -155,22 +154,21 @@ import { About } from './components/about.js';
   root.appendChild(dom);
 
 
-  async function fetchEntry(name, index) {
-    const metadata = tree.children[name].metadata;
+  async function fetchEntry(name, entryMeta, index) {
+    const metadata = entryMeta.metadata;
     const entryId = metadata.entryId;
 
-    if (state.entries[entryId] === undefined) {
+    if (state.promiseEntries[index] === undefined) {
 
-      const tags = tree.children[name].tags;
+      const tags = entryMeta.tags;
 
-      let path = config.rootPath + (sortedNames.length - index) + '/';
+      let path = config.rootPath + (sortedEntries.length - index) + '/';
 
       if (metadata.urlName) {
         path += metadata.urlName + '/';
       }
 
       const entry = {
-        name,
         rootDir,
         path,
         entryId,
@@ -179,19 +177,27 @@ import { About } from './components/about.js';
         index,
       };
 
-      const result = await fetch(rootDir + '/' + name + '/' + entry.metadata.contentFilename);
-      entry.content = await result.text();
+      // retrieved and rendered first.
+      const contentPromise = fetch(rootDir + '/' + name + '/' + entry.metadata.contentFilename)
+        .then(result => result.text());
 
-      state.entries[entryId] = entry;
+      const entryPromise = contentPromise
+        .then(content => {
+          entry.content = content;
+          return entry;
+        });
+
+      entry.contentPromise = contentPromise;
+      state.promiseEntries[index] = entryPromise;
     }
   }
 
-  async function fetchMissingEntries() {
+  function fetchMissingEntries() {
 
-    //for (const name of sortedNames) {
     for (let i = 0; i < sortedNames.length; i++) {
       const name = sortedNames[i];
-      await fetchEntry(name, i);
+      const entryMeta = sortedEntries[i];
+      fetchEntry(name, entryMeta, i);
     }
   }
 

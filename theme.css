@@ -84,9 +84,7 @@ pre {
   background-color: #ffffff;
 }
 
-/*
-.entry {
-  border: 1px solid;
+.list-entry {
   opacity: 1;
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
@@ -102,7 +100,6 @@ pre {
     opacity: 1;
   }
 }
-*/
 
 .code-block {
   background-color: #333333;

@@ -64,7 +64,7 @@ const Navbar = () => {
 };
 
 
-const Feed = (entries) => {
+const Feed = (promiseEntries) => {
 
   const dom = document.createElement('div');
   dom.classList.add('feed');
@@ -72,22 +72,35 @@ const Feed = (entries) => {
   const list = document.createElement('div');
   list.classList.add('entry-list');
 
-  entries.forEach((e, index) => {
-    const entry = document.createElement('div');
-    entry.classList.add('entry-list__entry');
-    entry.appendChild(ListEntry(e));
-    list.appendChild(entry);
+  promiseEntries.forEach(async (promise, index) => {
 
-    entry.addEventListener('fullscreen', () => {
-      dom.dispatchEvent(new CustomEvent('entry-fullscreen', {
-        bubbles: true,
-        detail: {
-          index,
-        },
-      }));
-    });
+    // TODO: figure out why this setTimeout is so effective. It makes
+    // rendering the first item in the list way faster, even without the
+    // timeout set to 0. I think it has something to do with forcing the
+    // items to be rendered on different event loop iterations.
+    setTimeout(() => {
+      promise.then((entryMeta) => {
+
+        const entry = document.createElement('div');
+        entry.classList.add('entry-list__entry');
+        entry.appendChild(ListEntry(entryMeta));
+        list.appendChild(entry);
+
+        entry.addEventListener('fullscreen', () => {
+          dom.dispatchEvent(new CustomEvent('entry-fullscreen', {
+            bubbles: true,
+            detail: {
+              entryMeta,
+            },
+          }));
+        });
+
+      });
+    }, 0);
+
+    dom.appendChild(list);
+
   });
-  dom.appendChild(list);
 
   return dom;
 };
@@ -110,7 +123,7 @@ const ListEntry = (entry) => {
 
   const entryUrl = path;
   entryControls.innerHTML = `
-    <span>${entry.name}</span>
+    <span>${entry.metadata.date}</span>
     <a href='${entryUrl}' target='_blank' id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</a>
     <a href='${entryUrl}' id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</a>
   `;
