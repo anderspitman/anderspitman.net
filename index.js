@@ -8,7 +8,7 @@ import { About } from './components/about.js';
 
 
 (async () => {
-  const { ClientBuilder } = await import(config.remooseRoot + '/client/dist/bundle.esm.js');
+  //const { ClientBuilder } = await import(config.remooseRoot + '/client/dist/bundle.esm.js');
 
   const state = {
     entries: {},
@@ -16,7 +16,8 @@ import { About } from './components/about.js';
 
   const key = document.cookie.split('=')[1];
 
-  const rootDir = config.remooseRoot + '/entries';
+  //const rootDir = config.remooseRoot + '/entries';
+  const rootDir = '/entries';
 
   const result = await fetch(rootDir);
   const tree = await result.json();
