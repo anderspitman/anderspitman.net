@@ -5,7 +5,7 @@
     "publicView": true
   },
   "children": {
-    "2014-06-15T22:40:00Z": {
+    "1": {
       "type": "dir",
       "size": 4096,
       "tags": [
@@ -41,7 +41,7 @@
       },
       "publicView": false
     },
-    "2014-07-21T10:41:56Z": {
+    "2": {
       "type": "dir",
       "size": 4096,
       "tags": [
@@ -77,7 +77,7 @@
       },
       "publicView": false
     },
-    "2014-08-04T08:52:47Z": {
+    "3": {
       "type": "dir",
       "size": 4096,
       "tags": [
@@ -115,7 +115,7 @@
       },
       "publicView": false
     },
-    "2014-08-30T22:35:24Z": {
+    "4": {
       "type": "dir",
       "size": 4096,
       "tags": [
@@ -153,14 +153,14 @@
       },
       "publicView": false
     },
-    "2014-12-01T22:43:09Z": {
+    "5": {
       "type": "dir",
       "size": 4096,
       "tags": [
         "tutorial"
       ],
       "permissions": {
-        "publicView": false
+        "publicView": true
       },
       "metadata": {
         "entryId": 5,
@@ -175,21 +175,21 @@
           "type": "file",
           "size": 3261,
           "permissions": {
-            "publicView": false
+            "publicView": true
           },
           "publicView": false
         }
       },
       "publicView": false
     },
-    "2014-12-17T17:30:55Z": {
+    "6": {
       "type": "dir",
       "size": 4096,
       "tags": [
         "tutorial"
       ],
       "permissions": {
-        "publicView": false
+        "publicView": true
       },
       "metadata": {
         "entryId": 6,
@@ -204,14 +204,14 @@
           "type": "file",
           "size": 839,
           "permissions": {
-            "publicView": false
+            "publicView": true
           },
           "publicView": false
         }
       },
       "publicView": false
     },
-    "2018-04-04": {
+    "7": {
       "type": "dir",
       "size": 4096,
       "tags": [
@@ -240,7 +240,7 @@
       },
       "publicView": false
     },
-    "2018-06-19": {
+    "8": {
       "type": "dir",
       "size": 4096,
       "tags": [
@@ -269,7 +269,7 @@
       },
       "publicView": false
     },
-    "2018-06-26": {
+    "9": {
       "type": "dir",
       "size": 4096,
       "tags": [
@@ -284,7 +284,8 @@
         "title": "Make You a Static Site Generator",
         "urlName": "make-static-site-generator",
         "format": "github-flavored-markdown",
-        "contentFilename": "entry.md"
+        "contentFilename": "entry.md",
+        "publish": false
       },
       "children": {
         "entry.md": {
@@ -298,7 +299,7 @@
       },
       "publicView": false
     },
-    "2018-06-27": {
+    "10": {
       "type": "dir",
       "size": 4096,
       "tags": [
@@ -328,5 +329,6 @@
       "publicView": false
     }
   },
-  "publicView": false
+  "publicView": false,
+  "public": true
 }
