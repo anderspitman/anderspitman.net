@@ -191,7 +191,8 @@ const Entry = (entry) => {
     };
   }
   else if (entry.metadata.format === 'github-flavored-markdown') {
-    entryHeader.innerHTML = `<h1>${entry.metadata.title}</h1>`;
+    const title = entry.metadata.title ? entry.metadata.title : "Untitled";
+    entryHeader.innerHTML = `<h1>${title}</h1>`;
     entryContent.innerHTML = marked(entry.content);
   }
   else {

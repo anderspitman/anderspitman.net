@@ -25,9 +25,17 @@ import { About } from './components/about.js';
 
   //console.log(tree);
 
-  // sort in reverse-chronological order
+  // this is used to achieve a "natural sort". see
+  // https://stackoverflow.com/a/38641281/943814
+  const naturalSorter = new Intl.Collator(undefined, {
+    numeric: true,
+    sensitivity: 'base'
+  });
+
+  // sort in reverse-chronological order (the key is the entry id, which
+  // increases monotonically).
   const sortedNames = Object.keys(tree.children)
-    .sort()
+    .sort(naturalSorter.compare)
     .reverse();
 
   const sortedEntries = sortedNames
