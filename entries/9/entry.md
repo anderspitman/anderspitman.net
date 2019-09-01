@@ -1,3 +1,10 @@
+**NOTE 2019-09-01**: This is an old post that I never really finished and
+published. You may notice that it ends rather abruptly. Ironically, I
+remembered it while re-writing my website as a single page app using plain JS.
+But although I'm no longer using the method or tools described here for my
+site, I think it's an interesting snapshot of where I was at in my thinking
+last year, and I don't want to throw away the writing.
+
 # Introduction
 
 There are lots of great static site generators out there. If you just want to
