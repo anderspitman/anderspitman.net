@@ -49,16 +49,13 @@ import { About } from './components/about.js';
 
   const navbar = Navbar();
   navbar.addEventListener('feed', () => {
-    window.history.pushState({}, "", config.rootPath + 'feed/');
-    navigate();
+    goTo(config.rootPath + 'feed/');
   });
   navbar.addEventListener('tutorials', () => {
-    window.history.pushState({}, "", config.rootPath + 'tutorials/');
-    navigate();
+    goTo(config.rootPath + 'tutorials/');
   });
   navbar.addEventListener('about', () => {
-    window.history.pushState({}, "", config.rootPath + 'about/');
-    navigate();
+    goTo(config.rootPath + 'about/');
   });
   dom.appendChild(navbar);
 
@@ -74,8 +71,7 @@ import { About } from './components/about.js';
     dom.appendChild(content);
 
     if (window.location.pathname === config.rootPath) {
-      window.history.pushState({}, "", config.rootPath + 'feed/');
-      navigate();
+      goTo(config.rootPath + 'feed/');
     }
     else if (window.location.pathname === config.rootPath + 'feed/' ||
              window.location.pathname === '/tutorials/') {
@@ -91,8 +87,7 @@ import { About } from './components/about.js';
           path += entryMeta.metadata.urlName + '/';
         }
 
-        window.history.pushState({}, "", path);
-        navigate();
+        goTo(path);
       };
 
       content.addEventListener('entry-fullscreen', fullscreenListener);
@@ -155,6 +150,7 @@ import { About } from './components/about.js';
     navigate();
   });
 
+  analytics();
   navigate();
 
 
@@ -207,6 +203,17 @@ import { About } from './components/about.js';
       const entryMeta = sortedEntries[i];
       fetchEntry(name, entryMeta, i);
     }
+  }
+
+  function goTo(path) {
+    window.history.pushState({}, "", path);
+    analytics(path);
+    navigate();
+  }
+
+  function analytics(path) {
+    ga('set', 'page', path);
+    ga('send', 'pageview');
   }
 
   //// render background visualization
