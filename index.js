@@ -4,6 +4,7 @@
 import { Navbar, FeedHeader, Feed, Entry } from './components/core.js';
 import { Tutorials } from './components/tutorials.js';
 import { About } from './components/about.js';
+import { RedpillView } from './projects/redpill/index.js';
 //import { Rainer } from './lib/redpill/index.js';
 
 
@@ -115,6 +116,9 @@ import { About } from './components/about.js';
     }
     else if (window.location.pathname === '/about/') {
       content.appendChild(About());
+    }
+    else if (window.location.pathname === '/projects/redpill/') {
+      content.appendChild(RedpillView(content));
     }
     else {
 
