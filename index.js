@@ -4,7 +4,7 @@
 import { Navbar, FeedHeader, Feed, Entry } from './components/core.js';
 import { Tutorials } from './components/tutorials.js';
 import { About } from './components/about.js';
-import { RedpillView } from './projects/redpill/index.js';
+import { RedpillView } from './components/redpill.js';
 //import { Rainer } from './lib/redpill/index.js';
 
 
