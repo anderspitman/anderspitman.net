@@ -107,9 +107,16 @@ const RedpillView = (parent) => {
     })
   }
 
+  // TODO: there's probably a cleaner way to do this. Maybe change redpill to
+  // resize automatically.
+  //
+  // Wait until parent has appended this element to the dom before rendering,
+  // otherwise the size will be 0.
   const observer = new MutationObserver(function(mutations) {
-    go(usernameInput.value);
-    observer.disconnect();
+    if (parent.contains(dom)) {
+      go(usernameInput.value);
+      observer.disconnect();
+    }
   });
   observer.observe(parent, {
     childList: true,
