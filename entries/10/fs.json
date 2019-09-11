@@ -1,0 +1,13 @@
+{
+  "tags": [
+    "tutorial"
+  ],
+  "appData": {
+    "entryId": 10,
+    "date": "2018-06-27",
+    "title": "Rust, React, and WebAssembly",
+    "urlName": "rust-react-and-webassembly",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}

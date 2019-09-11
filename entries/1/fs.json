@@ -1,0 +1,20 @@
+{
+  "tags": [
+    "tutorial"
+  ],
+  "appData": {
+    "entryId": 1,
+    "title": "Setting up an IPython Development Environment from Source",
+    "urlName": "setting-up-an-ipython-development-environment-from-source",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md",
+    "date": "2014-06-15T22:40:00Z",
+    "keywords": [
+      "IPython",
+      "Python",
+      "PySide",
+      "ZeroMQ",
+      "Tutorial"
+    ]
+  }
+}

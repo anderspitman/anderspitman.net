@@ -1,0 +1,20 @@
+{
+  "tags": [
+    "tutorial"
+  ],
+  "appData": {
+    "entryId": 2,
+    "title": "Asterisk ARI Quickstart Tutorial in Python",
+    "urlName": "asterisk-ari-quickstart-in-python",
+    "format": "github-flavored-markdown",
+    "date": "2014-07-21T10:41:56Z",
+    "contentFilename": "entry.md",
+    "keywords": [
+      "Python",
+      "Asterisk",
+      "ARI",
+      "Quickstart",
+      "Tutorial"
+    ]
+  }
+}

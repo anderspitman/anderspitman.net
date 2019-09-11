@@ -1,0 +1,13 @@
+{
+  "tags": [
+    "tutorial"
+  ],
+  "appData": {
+    "entryId": 6,
+    "title": "Fix for Vimium that Stopped Working",
+    "urlName": "fix-for-vimium-that-stopped-working",
+    "contentFilename": "entry.md",
+    "date": "2014-12-17T17:30:55Z",
+    "format": "github-flavored-markdown"
+  }
+}
