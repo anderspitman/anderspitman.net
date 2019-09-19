@@ -1,27 +1,64 @@
 # Introduction
 
-I've been thinking a lot about dependencies lately.
+We love talking about "fatigue" in the JavaScript community. You know what I've
+been getting a bit fatigued by lately? This:
 
-I'll start by giving my working definition of what a dependency is.
+<img class='image' src='https://anderspitman.net/public/github_security_warning.png'></img>
 
-Then I'll go through a list of things I didn't really used to think of
-as dependencies, but now do. Then I'll suggest a simple framework that I use
-for classifying dependencies.
+I've been thinking a lot about dependencies recently. This is a bit of a brain
+dump.
+
+I'll start by giving my working definition of what a dependency is, then I'll
+go through a list of things we might not typically think of as dependencies,
+but maybe should. Finally, I'll present a simple model I've started using for
+classifying dependencies.
 
 # What is a dependency?
 
-A dependency is any part of a system required to provide a specific experience,
-which you or your team didn't create.
+A dependency is any part of a system required to provide a specific experience.
 
-Okay, so what is an "experience"? This is a bit harder. You can think of it
-as accomplishing a specific job (spreadsheets), or providing a fun simulation
-(game), or calculating a result (algorithm). Basically an experience is a
-result.
+Okay, so what is an "experience"? This is a bit harder to pin down. You can
+think of it as accomplishing a specific job (spreadsheets), or providing a fun
+simulation (game), or calculating a result (algorithm). The more time users
+spend with a piece of software, the more they get used to a specific
+experience. In general, we want to avoid changing an experience unless we have
+a very good reason to do so. The central thesis of this article is that
+dependencies create openings for the experiences we develop to change without
+our consciously wanting them to, and so we should be thoughtful and careful
+about the dependencies we take on.
+
+It's important to consider that there is a "spectrum of externality" of
+dependencies. On one end is internal dependencies, on the other is external.
+The more internal a dependency is, the more control your team has over it.
+Here are a few examples, in increasing externality:
+
+1. Code that exists in the same module as the experience you're developing. You
+   have maximum control over this code.
+
+2. Company code that the current module calls is slightly more external, but
+   still likely under your direct control, or that of your team.
+
+3. Non-company open source code is much more external than any internal code.
+   There is a high risk of such dependencies changing your experiences
+   unintentionally, but the fact that you can modify the source gives you an
+   escape hatch if you need it.
+
+4. Non-company closed-source code is maximally external. As such it brings the
+   highest risk when adding it to your project.
 
 
-# What are some common dependencies?
+# Examples of Dependencies
+
+Here's a list of common dependencies. You may never have thought of some of
+them in this light before.
 
 ## Hardware
+
+The hardware your software runs on is a dependency. A big one. First of all
+it's almost certainly 100% external; you have little to no control over it.
+However, hardware platforms also tend to be quite reliable and unlikely to
+change your software experience unexpectedly. And more importantly, you can't
+avoid hardware dependencies so there's no point fretting about it.
 
 ## Operating systems
 
