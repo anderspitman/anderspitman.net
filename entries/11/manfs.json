@@ -1,0 +1,13 @@
+{
+  "tags": [
+    "moosedrive"
+  ],
+  "appData": {
+    "entryId": 11,
+    "date": "2019-09-18",
+    "title": "Dependencies",
+    "urlName": "dependencies",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}
