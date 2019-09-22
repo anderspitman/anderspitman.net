@@ -36,6 +36,7 @@ import { RedpillView } from './components/redpill.js';
   // sort in reverse-chronological order (the key is the entry id, which
   // increases monotonically).
   const sortedNames = Object.keys(tree.children)
+    .filter(name => tree.children[name].metadata.publish !== false)
     .sort(naturalSorter.compare)
     .reverse();
 
