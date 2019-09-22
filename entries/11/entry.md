@@ -1,3 +1,11 @@
+# Thoughts
+
+* Prefer dependencies that you can swap out without harming the experience.
+* Ward Cunningham if you look in there it should be about what you expect.
+* Not limited to software. Pickleball has a depenency on a paddle, ball, and
+  optionally a court and at least one other person.
+
+
 # Introduction
 
 We love talking about "fatigue" in the JavaScript community. You know what I've
@@ -82,6 +90,13 @@ why StackOverflow requests that submitters include an original quote from any
 linked pages. As always, there are tradeoffs here. A web page with no links
 isn't much of a web page, but relying too heavily on them can be a problem
 too.
+
+You could always link out to the Internet Archive, but then you're centralizing
+all your link dependencies. I think the long-term solution to this problem
+could be something like IPFS, where websites pin versions of everything they
+link to. But that has its own problems. ie, if you link out to an insecure
+version of a web app. This would basically be the web's version of static
+linking.
 
 ## Frameworks/Libraries
 
