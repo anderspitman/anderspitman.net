@@ -7,6 +7,11 @@ import { About } from './components/about.js';
 import { RedpillView } from './components/redpill.js';
 //import { Rainer } from './lib/redpill/index.js';
 
+const config = {
+  remooseRoot: 'http://localhost:9001',
+  rootPath: '/',
+};
+
 
 (async () => {
   //const { ClientBuilder } = await import(config.remooseRoot + '/client/dist/bundle.esm.js');
@@ -43,13 +48,13 @@ import { RedpillView } from './components/redpill.js';
   const sortedEntries = sortedNames
     .map(name => tree.children[name]);
 
-
   const entryNameOffset = config.rootPath.split('/').length - 1;
 
   const dom = document.createElement('div');
   dom.classList.add('main');
 
-  const navbar = Navbar();
+
+  const navbar = Navbar(config);
   navbar.addEventListener('feed', () => {
     goTo(config.rootPath + 'feed/');
   });
@@ -96,7 +101,7 @@ import { RedpillView } from './components/redpill.js';
 
       if (window.location.pathname === config.rootPath + 'feed/') {
 
-        content.appendChild(Feed(state.promiseEntries));
+        content.appendChild(Feed(config, state.promiseEntries));
       }
       else if (window.location.pathname === '/tutorials/') {
 

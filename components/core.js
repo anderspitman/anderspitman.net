@@ -9,7 +9,7 @@ marked.setOptions({
 });
 
 
-const Navbar = () => {
+const Navbar = (config) => {
   const dom = document.createElement('nav');
   dom.classList.add('semi-transparent');
 
@@ -64,7 +64,7 @@ const Navbar = () => {
 };
 
 
-const Feed = (promiseEntries) => {
+const Feed = (config, promiseEntries) => {
 
   const dom = document.createElement('div');
   dom.classList.add('feed');
@@ -83,7 +83,7 @@ const Feed = (promiseEntries) => {
 
         const entry = document.createElement('div');
         entry.classList.add('entry-list__entry');
-        entry.appendChild(ListEntry(entryMeta));
+        entry.appendChild(ListEntry(config, entryMeta));
         list.appendChild(entry);
 
         entry.addEventListener('fullscreen', () => {
@@ -106,7 +106,7 @@ const Feed = (promiseEntries) => {
 };
 
 
-const ListEntry = (entry) => {
+const ListEntry = (config, entry) => {
   const dom = document.createElement('div');
   dom.classList.add('list-entry');
   dom.classList.add('semi-transparent');
