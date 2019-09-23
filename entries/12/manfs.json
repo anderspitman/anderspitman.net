@@ -1,0 +1,17 @@
+{
+  "tags": [
+    "ios",
+    "safari",
+    "apple",
+    "javascript",
+    "debugging"
+  ],
+  "appData": {
+    "entryId": 12,
+    "date": "2019-09-23",
+    "title": "Debugging iOS Safari",
+    "urlName": "debuggin-ios-safari",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}
