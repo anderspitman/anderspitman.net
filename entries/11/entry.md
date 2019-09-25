@@ -5,8 +5,7 @@ been getting a bit fatigued by lately? This:
 
 <img class='image' src='https://anderspitman.net/public/github_security_warning.png'></img>
 
-I've been thinking a lot about dependencies recently. This is a bit of a brain
-dump.
+I've been thinking a lot about dependencies. This is a bit of a brain dump.
 
 I'll start by giving my working definition of what a dependency is, then I'll
 go through a list of common dependencies. Finally, I'll present a simple model
@@ -14,17 +13,30 @@ I've started using for classifying dependencies.
 
 # What is a dependency?
 
-A dependency is any part of a system required to provide a specific experience.
+For the purposes of this article, I will define a dependency as
+**any component of an experience which is outside your direct control
+as the developer of that experience.**
 
-Okay, so what is an "experience"? This is a bit harder to pin down. You can
-think of it as accomplishing a specific job (spreadsheets), or providing a fun
-simulation (game), or calculating a result (algorithm). The more time users
-spend with a piece of software, the more they get used to a specific
-experience. In general, we want to avoid changing an experience unless we have
-a very good reason to do so. The central thesis of this article is that
+Note that this definition doesn't say anything about software. Software
+experiences (ie apps, websites, games, etc) are only one type. Driving your
+car down the road, listening to a concert, or playing football 
+are all experiences, and all have dependencies. Ever tried to play football
+without a ball? Whoever invented the rules of football was free to
+design the experience however they wanted, but ultimately the experience always
+depends on some sort of a ball being available at "runtime".
+
+For the remainder of this article, I'm going to focus on dependencies of
+software experiences.
+
+The more time users spend with a piece of software, the more they get used to a
+specific experience. In general, we want to avoid changing an experience unless
+we have a very good reason to do so (ie adding a feature that we are confident
+will significantly improve the experience).
+
+**The central thesis of this article is that
 dependencies create openings for the experiences we develop to change without
 our deliberately wanting them to, and so we should be thoughtful and careful
-about the dependencies we take on.
+about the dependencies we take on.**
 
 It's important to consider that there is a "spectrum of externality" of
 dependencies. On one end is internal dependencies, on the other is external.
