@@ -141,12 +141,24 @@ const ListEntry = (config, entry) => {
       }));
     });
 
+  const tagList = document.createElement('span');
+  tagList.classList.add('tag-list');
+
+  for (const tag of entry.tags) {
+    const tagEl = document.createElement('span');
+    tagEl.classList.add('tag-list__tag');
+    tagEl.innerText = tag;
+    tagList.appendChild(tagEl);
+  }
+
   if (entry.metadata.title) {
     const title = document.createElement('h1');
     title.classList.add('list-entry__title');
     title.innerText = entry.metadata.title;
     dom.appendChild(title);
   }
+
+  dom.appendChild(tagList);
 
   if (entry.content.length < 1024) {
     const content = document.createElement('div');

@@ -183,6 +183,7 @@ const config = {
 
       const entry = {
         name,
+        tags,
         rootDir,
         metadata,
       };

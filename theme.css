@@ -63,7 +63,7 @@ pre {
   margin-bottom: 64px;
   padding: 10px;
   /*overflow: scroll;*/
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .list-entry__title {
@@ -84,6 +84,21 @@ pre {
 .list-entry__control-btn {
   float: right;
   margin-left: 20px;
+}
+
+.tag-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.tag-list__tag {
+  margin: 2px 5px;
+  padding: 0 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #111111;
+  background-color: #cccccc;
+  border-radius: 5px;
 }
 
 .entry {
