@@ -4,7 +4,7 @@ const About = () => {
   dom.innerHTML = `
     <div id='portrait-container'>
       <div class='portrait'>
-        <img src="/assets/images/portrait.jpg" width="100%" alt="profile portrait">
+        <img src="/assets/images/portrait.jpg" width="100%">
       </div>
     </div>
     <div class='text-content semi-transparent'>

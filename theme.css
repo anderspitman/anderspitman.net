@@ -6,6 +6,7 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
   --bg-color: rgba(20, 20, 20, 1.0);
+  --main-color: #DB8A00;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
 }
 
 a {
-    color: #DB8A00;
+    color: var(--main-color);
 }
 
 nav {
@@ -52,7 +53,8 @@ pre {
 }
 
 .portrait {
-    width: 30%;
+    width: 200px;
+    height: 200px;
     margin: 0 auto;
 }
 
@@ -62,7 +64,16 @@ pre {
   padding: 10px;
   /*overflow: scroll;*/
   overflow: hidden;
-  max-height: 300px;
+}
+
+.list-entry__title {
+  font-size: 30px;
+}
+
+.list-entry__id {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--main-color);
 }
 
 .list-entry__controls {

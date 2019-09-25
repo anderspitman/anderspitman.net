@@ -170,7 +170,6 @@ const config = {
 
   async function fetchEntry(name, entryMeta, index) {
     const metadata = entryMeta.metadata;
-    const entryId = metadata.entryId;
 
     if (state.promiseEntries[index] === undefined) {
 
@@ -183,12 +182,9 @@ const config = {
       }
 
       const entry = {
+        name,
         rootDir,
-        path,
-        entryId,
         metadata,
-        tags,
-        index,
       };
 
       // retrieved and rendered first.
@@ -201,7 +197,6 @@ const config = {
           return entry;
         });
 
-      entry.contentPromise = contentPromise;
       state.promiseEntries[index] = entryPromise;
     }
   }

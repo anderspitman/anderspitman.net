@@ -115,7 +115,7 @@ const ListEntry = (config, entry) => {
   entryControls.classList.add('list-entry__controls');
   dom.appendChild(entryControls);
 
-  let path = config.rootPath + entry.metadata.entryId + '/';
+  let path = config.rootPath + entry.name + '/';
 
   if (entry.metadata.urlName) {
     path += entry.metadata.urlName + '/';
@@ -123,6 +123,7 @@ const ListEntry = (config, entry) => {
 
   const entryUrl = path;
   entryControls.innerHTML = `
+    <span class='list-entry__id'>#${entry.name}</span>
     <span>${entry.metadata.date}</span>
     <a href='${entryUrl}' target='_blank' id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</a>
     <a href='${entryUrl}' id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</a>
@@ -140,7 +141,30 @@ const ListEntry = (config, entry) => {
       }));
     });
 
-  dom.appendChild(Entry(entry));
+  if (entry.metadata.title) {
+    const title = document.createElement('h1');
+    title.classList.add('list-entry__title');
+    title.innerText = entry.metadata.title;
+    dom.appendChild(title);
+  }
+
+  if (entry.content.length < 1024) {
+    const content = document.createElement('div');
+    content.classList.add('list-entry__content');
+
+    //const start = performance.now();
+    if (entry.metadata.format === 'github-flavored-markdown') {
+      content.innerHTML = marked(entry.content);
+    }
+    else {
+      content.innerHTML = entry.content;
+    }
+    //console.log("render time: ", performance.now() - start);
+    dom.appendChild(content);
+  }
+  
+
+  //dom.appendChild(Entry(entry));
 
   return dom;
 };
@@ -193,7 +217,9 @@ const Entry = (entry) => {
   else if (entry.metadata.format === 'github-flavored-markdown') {
     const title = entry.metadata.title ? entry.metadata.title : "Untitled";
     entryHeader.innerHTML = `<h1>${title}</h1>`;
+    //const start = performance.now();
     entryContent.innerHTML = marked(entry.content);
+    //console.log("render time: ", performance.now() - start);
   }
   else {
     throw new Error("invalid format");
