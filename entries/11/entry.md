@@ -5,7 +5,7 @@ been getting a bit fatigued by lately? This:
 
 <img class='image' src='https://anderspitman.net/public/github_security_warning.png'></img>
 
-I've been thinking a lot about dependencies. This is a bit of a brain dump.
+I've been thinking a lot about dependencies. This is something of a brain dump.
 
 I'll start by giving my working definition of what a dependency is, then I'll
 go through a list of common dependencies. Finally, I'll present a simple model
@@ -55,7 +55,7 @@ flagship Android phone, but then they lose their phone and have to downgrade
 to a budget model for a few months, and suddenly your app is unusable for them.
 
 Note that developers who make software for Apple products have a huge advantage
-here. The number of devices they need to develop for is vastly smaller than
+here. The number of devices they need to test on is vastly smaller than
 developers for Windows, Linux, and especially Android.
 
 Hardware is particularly a challenge with web development, where the same
@@ -70,20 +70,21 @@ consistency and reliability you can achieve. Last year I developed some forearm
 pain in both arms from typing too much, so I made some Arduino-based [foot
 pedals](https://github.com/anderspitman/ergo-pedals) so I didn't have to strain
 so much to hit combo keys. I have a pair at home and work, that have both been
-working non-stop for a year. No failures, no glitches, no reboots.
+working 24/7 for a year. No failures, no glitches, no reboots necessary.
 
 ## Operating systems
 
 If your app is too tightly coupled to a specific version of an operating
 system, when the user updates their computer your app might quit working. This
-is a much bigger problem on systems like Linux, which isn't used much for
-end-user apps anyway. From what I've heard, Windows has an excellent
-backwards-compatibility history. Mobile OSes seem to be somewhere in the
-middle.
+is a much bigger problem on systems like Linux. I often have issues with apps
+not being able to find the right versions of dynamic libraries.
+
+From what I've heard, Windows has an excellent backwards-compatibility history.
+Mobile OSes seem to be somewhere in the middle.
 
 One example I've seen is where an OS adopts a specific design paradigm (such
 as Material Design for Android), and there becomes pressure to overhaul your
-app so the UI is consistent.
+app so the UI is consistent with the rest of the OS.
 
 ## Programming Language Compilers/Runtimes
 
@@ -106,7 +107,7 @@ but I'm not sure how common that is (or at least should be).
 Bundlers, transpilers, minifiers, uglifiers, etc.
 
 They're called "dev dependencies" for a reason. Have you ever done a fresh,
-`npm init` followed by `npm install webpack webpack-cli` then taken a peek in
+'`npm init`' followed by '`npm install webpack webpack-cli`' then taken a peek in
 `node_modules`?
 
 Speaking of npm, I think it belongs here as well. Yes, npm is a dependency.
@@ -114,8 +115,9 @@ Especially if the experience you're providing is a library that is only
 installable by using it.  It's perfectly possible to write a node service or
 browser application without having a package.json at all. As a matter of fact,
 that's the case with this website, and my personal website, both of which are
-single-page apps.
+single-page apps with few dependencies.
 
+Note that Python/pip is a similar story to npm.
 
 
 ## The Internet
@@ -128,7 +130,7 @@ shovels](https://www.theguardian.com/world/2011/apr/06/georgian-woman-cuts-web-a
 and whatever the cloud decided to have for breakfast on a given morning.
 
 If your app relies on an internet connection at runtime, almost by definition
-you a shipping a software experience which is constantly changing. Just because
+you are shipping a software experience which is constantly changing. Just because
 people have become accustomed to dealing with slow internet connections doesn't
 mean it's ok for us to abuse the internet as a dependency. There are many
 techniques for improving the user experience, the most basic of which is
@@ -140,10 +142,10 @@ depends on whether you're talking about a content website, or a web app. If
 it's an app, and I have a choice between waiting 5 seconds for it to download
 all the code and enough data for page changes to be instantaneous, vs an
 instant first page followed by variable page loads later, content jumping
-around and things stream in, etc, I'll take the 5 seconds every time.
+around as things stream in, etc, I'll take the 5 seconds every time.
 Especially if it gives me a loading bar.
 
-It's all about expectations. For year, gamers have been waiting on huge
+It's all about expectations. For year, gamers have been waiting hours on huge
 downloads before they can even run the game. Because once the download is done,
 the performance is great.
 
@@ -161,7 +163,7 @@ writing today to still work 10 years from now. That's impressive.
 
 ## Web Links
 
-Links are a central component of the web. However, they also make any given
+Links are a central part of the web. However, they also make any given
 web experience incredibly brittle. Any web page you make is dependent on
 every link on that page. If you link to an external page, and that page
 disappears (which happens often), your experience is now broken.
@@ -196,15 +198,16 @@ Just a few days ago, the inventor of NPM made a change in minipass, which broke
 node-pre-gyp (I still don't know how exactly it depends on minipass, since it's
 not a direct dependency...), which broke bcrypt, which broke our Docker build,
 and [a lot of other people's
-stuff](https://github.com/mapbox/node-pre-gyp/issues/477).
+stuff](https://github.com/mapbox/node-pre-gyp/issues/477). Kudos to them for
+working to fix it right away.
 
-Note that although pinning versions of the libraries you're using would have
-solved this particular problem for us, and is a good idea in general, it is
+Note that although pinning versions of the libraries we're using would have
+avoided this particular problem for us, and is a good idea in general, it is
 not a silver bullet. `package-lock.json` can save you from your app breaking
 overnight, but in general there are going to be security updates and other
 issues.
 
-A few months ago we had a dependency that was no longer being maintained.  It
+A few months ago we had a dependency that hadn't been maintained in years.  It
 had gotten so old that it required an ancient version of node to work properly.
 Eventually it started preventing us from keeping our other dependencies up to
 date, because they depended on modern JavaScript features. Languages and
@@ -212,7 +215,7 @@ runtimes are relatively stable, but they DO change.
 
 ## Datasets
 
-If your app/experience relies on a specific dataset, that's a dependencies.
+If your app/experience relies on a specific dataset, that's a dependency.
 One example would be an interactive data visualization. If you collected and
 control the data yourself, this likely isn't a problem. However, if the data
 comes from a 3rd source that is constantly changing, you're dependant on that
