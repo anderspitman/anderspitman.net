@@ -66,7 +66,7 @@ const config = {
   });
   dom.appendChild(navbar);
 
-  async function navigate() {
+  async function navigate(atStart) {
 
     const oldContent = dom.querySelector('.content');
     if (oldContent) {
@@ -78,7 +78,9 @@ const config = {
     dom.appendChild(content);
 
     if (window.location.pathname === config.rootPath) {
-      goTo(config.rootPath + 'feed/');
+      if (!atStart) {
+        goTo(config.rootPath + 'feed/');
+      }
     }
     else if (window.location.pathname === config.rootPath + 'feed/' ||
              window.location.pathname === '/tutorials/') {
@@ -157,7 +159,9 @@ const config = {
   }
 
   window.addEventListener('popstate', (e) => {
-    navigate();
+    // atStart indicates we're at the page we started on.
+    const atStart = e.state === null;
+    navigate(atStart);
   });
 
   analytics();
