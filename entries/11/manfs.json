@@ -1,11 +1,12 @@
 {
   "tags": [
-    "moosedrive"
+    "moosedrive",
+    "dependencies"
   ],
   "appData": {
     "entryId": 11,
     "date": "2019-09-27",
-    "title": "Dependencies",
+    "title": "Before You Reach For That Dependency",
     "urlName": "dependencies",
     "format": "github-flavored-markdown",
     "contentFilename": "entry.md"
