@@ -1,0 +1,3 @@
+[submodule "deps/marked"]
+	path = deps/marked
+	url = https://github.com/markedjs/marked
