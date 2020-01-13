@@ -1,0 +1,14 @@
+{
+  "tags": [
+    "blog",
+    "simplicity"
+  ],
+  "appData": {
+    "entryId": 16,
+    "title": "Please make your products work with URLs",
+    "date": "2020-01-13",
+    "urlName": "please-work-with-urls",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}
