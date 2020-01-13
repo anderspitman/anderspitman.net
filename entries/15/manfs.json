@@ -1,0 +1,13 @@
+{
+  "tags": [
+    "microblog",
+    "quote"
+  ],
+  "appData": {
+    "entryId": 15,
+    "date": "2020-01-06",
+    "urlName": "services-as-libraries",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}
