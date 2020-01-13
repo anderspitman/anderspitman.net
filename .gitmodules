@@ -4,3 +4,6 @@
 [submodule "deps/highlight.js"]
 	path = deps/highlight.js
 	url = https://github.com/highlightjs/highlight.js
+[submodule "deps/redpill"]
+	path = deps/redpill
+	url = https://github.com/anderspitman/redpill
