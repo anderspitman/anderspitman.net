@@ -1,0 +1,127 @@
+#!/bin/env node
+
+const process = require('process');
+const fs = require('fs');
+const path = require('path');
+//const marked = require('./deps/marked/lib/marked.js');
+
+if (process.argv.length < 5) {
+  console.log("Usage: curly-jefferson entryDir outDir host");
+  process.exit(1);
+}
+
+const entryDir = process.argv[2];
+const outDir = process.argv[3];
+const host = process.argv[4];
+
+try {
+  fs.readdirSync(outDir);
+}
+catch (e) {
+  fs.mkdirSync(outDir);
+}
+
+const items = fs.readdirSync(entryDir, { withFileTypes: true });
+
+// this is used to achieve a "natural sort". see
+// https://stackoverflow.com/a/38641281/943814
+const naturalSorter = new Intl.Collator(undefined, {
+  numeric: true,
+  sensitivity: 'base'
+});
+
+
+const header = `
+# Navigation
+
+You're on the text version of this site. The rich web version is available at:
+${host}
+To navigate the text version, simply copy one of the following URLs into your
+browser, or the entire cURL command into your terminal.
+
+* Feed  => curl ${host}/txt/feed
+* About => curl ${host}/txt/about
+
+`;
+
+const aboutText = 
+`![portrait](${host}/assets/images/portrait.jpg)
+
+Hi there. My name is Anders Pitman. I am a data visualization software
+engineer. I'm passionate about the power of a good visualization to catalyze
+learning and insight. I'm particularly drawn to problems in medicine,
+education, and social issues. Hans Rosling is my hero.
+
+You can email me at anders@anderspitman.net. Here are some other useful URLs:
+
+GitHub:        https://github.com/anderspitman
+
+StackOverflow: https://stackoverflow.com/users/943814/anderspitman
+
+LinkedIn:      https://www.linkedin.com/in/anderspitman/
+
+Twitter:       https://twitter.com/anderspitman`;
+
+for (const item of items) {
+
+  const itemPath = path.join(entryDir, item.name);
+
+  const entryPath = path.join(itemPath, 'entry.md');
+
+  const entryText = fs.readFileSync(entryPath, 'utf8');
+  //const htmlText = marked(entryText);
+  const mdPath = path.join(itemPath, 'manfs.json');
+  const metadata = JSON.parse(fs.readFileSync(mdPath, 'utf8'));
+
+  //const entryOutDir = path.join(outDir, item.name);
+
+  //try {
+  //  fs.readdirSync(entryOutDir);
+  //}
+  //catch (e) {
+  //  fs.mkdirSync(entryOutDir);
+  //}
+
+  //const entryOutPath = path.join(entryOutDir, 'index.html');
+  const entryOutPath = path.join(outDir, item.name);
+
+  const title = metadata.appData.title ? metadata.appData.title : 'Untitled';
+
+  const outText = `${header}\n# ${title} (${metadata.appData.date})\n\n${entryText}`
+  //fs.writeFileSync(entryOutPath, htmlText);
+  fs.writeFileSync(entryOutPath, outText);
+
+}
+
+const feedText = genFeedText(items, entryDir);
+const feedPath = path.join(outDir, 'feed');
+fs.writeFileSync(feedPath, `${header}\n# Feed\n\n${feedText}\n`);
+
+const aboutPath = path.join(outDir, 'about');
+fs.writeFileSync(aboutPath, `${header}\n${aboutText}\n`);
+
+function genFeedText(items, entryDir) {
+  let feedText = "";
+
+  // sort in reverse-chronological order (the key is the entry id, which
+  // increases monotonically).
+  const sortedItems = items
+    .sort((a, b) => naturalSorter.compare(a.name, b.name))
+    .reverse();
+
+  for (const item of sortedItems) {
+    const itemPath = path.join(entryDir, item.name);
+
+    const entryPath = path.join(itemPath, 'entry.md');
+
+    const entryText = fs.readFileSync(entryPath, 'utf8');
+    //const htmlText = marked(entryText);
+    const mdPath = path.join(itemPath, 'manfs.json');
+    const metadata = JSON.parse(fs.readFileSync(mdPath, 'utf8'));
+
+    const title = metadata.appData.title ? metadata.appData.title : 'Untitled';
+    feedText += `* ${title} (${metadata.appData.date})\n  => curl ${host}/txt/${item.name}\n`;
+  }
+
+  return feedText;
+}

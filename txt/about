@@ -1,0 +1,28 @@
+
+# Navigation
+
+You're on the text version of this site. The rich web version is available at:
+https://anderspitman.net
+To navigate the text version, simply copy one of the following URLs into your
+browser, or the entire cURL command into your terminal.
+
+* Feed  => curl https://anderspitman.net/txt/feed
+* About => curl https://anderspitman.net/txt/about
+
+
+![portrait](https://anderspitman.net/assets/images/portrait.jpg)
+
+Hi there. My name is Anders Pitman. I am a data visualization software
+engineer. I'm passionate about the power of a good visualization to catalyze
+learning and insight. I'm particularly drawn to problems in medicine,
+education, and social issues. Hans Rosling is my hero.
+
+You can email me at anders@anderspitman.net. Here are some other useful URLs:
+
+GitHub:        https://github.com/anderspitman
+
+StackOverflow: https://stackoverflow.com/users/943814/anderspitman
+
+LinkedIn:      https://www.linkedin.com/in/anderspitman/
+
+Twitter:       https://twitter.com/anderspitman

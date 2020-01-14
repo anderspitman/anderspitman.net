@@ -1,0 +1,17 @@
+
+# Navigation
+
+You're on the text version of this site. The rich web version is available at:
+https://anderspitman.net
+To navigate the text version, simply copy one of the following URLs into your
+browser, or the entire cURL command into your terminal.
+
+* Feed  => curl https://anderspitman.net/txt/feed
+* About => curl https://anderspitman.net/txt/about
+
+
+# The 64 Milliseconds Manifesto (2019-09-24)
+
+In an interactive software application, any user action SHOULD result in a
+noticeable change within 16ms, actionable information within 32ms, and at
+least one full screen of content within 64ms.

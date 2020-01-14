@@ -1,0 +1,16 @@
+
+# Navigation
+
+You're on the text version of this site. The rich web version is available at:
+https://anderspitman.net
+To navigate the text version, simply copy one of the following URLs into your
+browser, or the entire cURL command into your terminal.
+
+* Feed  => curl https://anderspitman.net/txt/feed
+* About => curl https://anderspitman.net/txt/about
+
+
+# Untitled (2020-01-06)
+
+Services are just dynamic libraries where HTTP is the
+[ABI](https://en.wikipedia.org/wiki/Application_binary_interface)
