@@ -36,7 +36,7 @@ const header = `
 
 You're on the text version of this site. The rich web version is available at:
 ${host}
-To navigate the text version, simply copy one of the following URLs into your
+To navigate the text version, simply paste one of the following URLs into your
 browser, or the entire cURL command into your terminal.
 
 * Feed  => curl ${host}/txt/feed

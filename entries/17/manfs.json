@@ -1,0 +1,15 @@
+{
+  "tags": [
+    "hacker news",
+    "plain text",
+    "simplicity"
+  ],
+  "appData": {
+    "entryId": 17,
+    "title": "HN Lost its mind because my site required JS. Now you just need cURL",
+    "date": "2020-01-14",
+    "urlName": "curlable",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}

@@ -3,7 +3,7 @@
 
 You're on the text version of this site. The rich web version is available at:
 https://anderspitman.net
-To navigate the text version, simply copy one of the following URLs into your
+To navigate the text version, simply paste one of the following URLs into your
 browser, or the entire cURL command into your terminal.
 
 * Feed  => curl https://anderspitman.net/txt/feed
@@ -12,6 +12,8 @@ browser, or the entire cURL command into your terminal.
 
 # Feed
 
+* HN Lost its mind because my site required JS. Now you just need cURL (2020-01-14)
+  => curl https://anderspitman.net/txt/17
 * Please make your products work with URLs (2020-01-13)
   => curl https://anderspitman.net/txt/16
 * Untitled (2020-01-06)

@@ -3,7 +3,7 @@
 
 You're on the text version of this site. The rich web version is available at:
 https://anderspitman.net
-To navigate the text version, simply copy one of the following URLs into your
+To navigate the text version, simply paste one of the following URLs into your
 browser, or the entire cURL command into your terminal.
 
 * Feed  => curl https://anderspitman.net/txt/feed
