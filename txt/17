@@ -1,19 +1,20 @@
 
 # Navigation
 
-You're on the text version of this site. If you were redirected here, it's
-because you have JavaScript disabled. The rich web version is available at:
+You're on the text version of this site.  The rich web version is available at:
 https://anderspitman.net
+If your browser was redirected here, it's because you have JavaScript disabled.
 To navigate the text version, simply paste one of the following URLs into your
-browser, or the entire cURL command into your terminal.
+browser, or the entire cURL command into your terminal. If you're looking for
+a specific post, check the list on the Feed page.
 
 * Feed  => curl https://anderspitman.net/txt/feed
 * About => curl https://anderspitman.net/txt/about
 
 
-# HN Lost its mind because my site required JS. Now you just need cURL (2020-01-14)
+# This site is now browsable with cURL (2020-01-14)
 
-TL;DR - This site is now browseable from the command line using cURL. Give it
+TL;DR - This site is now browsable from the command line using cURL. Give it
 a try:
 
 ```bash
@@ -151,9 +152,13 @@ prefer?
 
 # Conclusion
 
-There's still more work to be done. Pure text is cool, but I still need to
-serve static HTML files of my posts. This will be a bit trickier to get
-working since my website is an SPA, but should be a fun challenge.
+There's still more work to be done. I currently have any users with JavaScript
+disabled being HTML-redirected to /txt/feed. This isn't ideal because if they
+were linked to a specific page, they have to find it in the list.
+
+Also, pure text is cool, but I still need to serve static HTML files of my
+posts. This will be a bit trickier to get working since my website is currently
+an SPA, but should be a fun challenge.
 
 
 [0]: https://anderspitman.net/16/please-work-with-urls/
