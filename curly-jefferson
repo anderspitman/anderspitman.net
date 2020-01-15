@@ -34,7 +34,9 @@ const naturalSorter = new Intl.Collator(undefined, {
 const header = `
 # Navigation
 
-You're on the text version of this site. The rich web version is available at:
+You're on the text version of this site. If your browser was redirected here,
+it's because you have JavaScript disabled. The rich web version is available
+at:
 ${host}
 To navigate the text version, simply paste one of the following URLs into your
 browser, or the entire cURL command into your terminal.
