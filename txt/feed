@@ -14,6 +14,8 @@ a specific post, check the list on the Feed page.
 
 # Feed
 
+* I just learned about HTML redirects (2020-01-15)
+  => curl https://anderspitman.net/txt/18
 * This site is now browsable with cURL (2020-01-14)
   => curl https://anderspitman.net/txt/17
 * Please make your products work with URLs (2020-01-13)
