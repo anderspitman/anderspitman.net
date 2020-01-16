@@ -1,8 +1,8 @@
 {
-  "tags": [
-    "tutorial"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "tutorial"
+    ],
     "entryId": 1,
     "title": "Setting up an IPython Development Environment from Source",
     "urlName": "setting-up-an-ipython-development-environment-from-source",

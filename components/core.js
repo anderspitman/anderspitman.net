@@ -144,7 +144,7 @@ const ListEntry = (config, entry) => {
   const tagList = document.createElement('span');
   tagList.classList.add('tag-list');
 
-  for (const tag of entry.tags) {
+  for (const tag of entry.metadata.tags) {
     const tagEl = document.createElement('span');
     tagEl.classList.add('tag-list__tag');
     tagEl.innerText = tag;

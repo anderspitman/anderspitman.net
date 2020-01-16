@@ -1,8 +1,8 @@
 {
-  "tags": [
-    "html"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "html"
+    ],
     "entryId": 18,
     "title": "I just learned about HTML redirects",
     "date": "2020-01-15",

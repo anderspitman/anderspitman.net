@@ -1,9 +1,9 @@
 {
-  "tags": [
-    "blog",
-    "simplicity"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "blog",
+      "simplicity"
+    ],
     "entryId": 16,
     "title": "Please make your products work with URLs",
     "date": "2020-01-13",

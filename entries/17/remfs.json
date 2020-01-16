@@ -1,10 +1,10 @@
 {
-  "tags": [
-    "hacker news",
-    "plain text",
-    "simplicity"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "hacker news",
+      "plain text",
+      "simplicity"
+    ],
     "entryId": 17,
     "title": "This site is now browsable with cURL",
     "date": "2020-01-14",

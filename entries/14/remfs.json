@@ -1,11 +1,11 @@
 {
-  "tags": [
-    "microblog",
-    "libfuse",
-    "fuse",
-    "debugging"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "microblog",
+      "libfuse",
+      "fuse",
+      "debugging"
+    ],
     "entryId": 14,
     "date": "2019-10-02",
     "title": "Compiling libfuse examples",

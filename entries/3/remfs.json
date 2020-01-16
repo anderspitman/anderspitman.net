@@ -1,8 +1,8 @@
 {
-  "tags": [
-    "tutorial"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "tutorial"
+    ],
     "entryId": 3,
     "title": "Chrome Extension Content Script Stylesheet Isolation",
     "urlName": "chrome-extension-content-script-stylesheet-isolation",

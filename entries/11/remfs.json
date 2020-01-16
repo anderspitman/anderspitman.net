@@ -1,9 +1,9 @@
 {
-  "tags": [
-    "moosedrive",
-    "dependencies"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "moosedrive",
+      "dependencies"
+    ],
     "entryId": 11,
     "date": "2019-09-27",
     "title": "Before You Reach For That Dependency",

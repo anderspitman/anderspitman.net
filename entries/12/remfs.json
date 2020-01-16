@@ -1,12 +1,12 @@
 {
-  "tags": [
-    "ios",
-    "safari",
-    "apple",
-    "javascript",
-    "debugging"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "ios",
+      "safari",
+      "apple",
+      "javascript",
+      "debugging"
+    ],
     "entryId": 12,
     "date": "2019-09-23",
     "title": "Debugging iOS Safari",

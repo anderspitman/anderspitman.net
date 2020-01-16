@@ -1,4 +1,4 @@
-import { Rainer } from '/deps/redpill/index.js';
+import { Rainer } from '../deps/redpill/index.js';
 
 
 const RedpillView = (parent) => {

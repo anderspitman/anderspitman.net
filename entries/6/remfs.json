@@ -1,8 +1,8 @@
 {
-  "tags": [
-    "tutorial"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "tutorial"
+    ],
     "entryId": 6,
     "title": "Fix for Vimium that Stopped Working",
     "urlName": "fix-for-vimium-that-stopped-working",

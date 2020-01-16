@@ -9,7 +9,7 @@ import { RedpillView } from './components/redpill.js';
 
 const config = {
   remooseRoot: 'http://localhost:9001',
-  rootPath: '/',
+  rootPath: '/req/anderspitman.net/',
 };
 
 
@@ -24,9 +24,9 @@ const config = {
   const key = document.cookie.split('=')[1];
 
   //const rootDir = config.remooseRoot + '/entries';
-  const rootDir = '/entries';
+  const rootDir = config.rootPath + 'entries';
 
-  const result = await fetch(rootDir);
+  const result = await fetch(rootDir + '/remfs.json');
   const tree = await result.json();
 
   //console.log(tree);
@@ -41,7 +41,7 @@ const config = {
   // sort in reverse-chronological order (the key is the entry id, which
   // increases monotonically).
   const sortedNames = Object.keys(tree.children)
-    .filter(name => tree.children[name].metadata.publish !== false)
+    //.filter(name => tree.children[name].metadata.publish !== false)
     .sort(naturalSorter.compare)
     .reverse();
 
@@ -83,7 +83,7 @@ const config = {
       }
     }
     else if (window.location.pathname === config.rootPath + 'feed/' ||
-             window.location.pathname === '/tutorials/') {
+             window.location.pathname === config.rootPath + 'tutorials/') {
 
       fetchMissingEntries();
 
@@ -105,16 +105,16 @@ const config = {
 
         content.appendChild(Feed(config, state.promiseEntries));
       }
-      else if (window.location.pathname === '/tutorials/') {
+      else if (window.location.pathname === config.rootPath + 'tutorials/') {
 
         const tutorials = sortedEntries
-          .filter(e => e.tags && e.tags.indexOf('tutorial') > -1);
+          .filter(e => e.ext.tags && e.ext.tags.indexOf('tutorial') > -1);
 
         const tutorialPromises = [];
         for (let i = 0; i < sortedEntries.length; i++) {
           const entryMeta = sortedEntries[i];
 
-          if (entryMeta.tags && entryMeta.tags.indexOf('tutorial') > -1) {
+          if (entryMeta.ext.tags && entryMeta.ext.tags.indexOf('tutorial') > -1) {
             tutorialPromises.push(state.promiseEntries[i]);
           }
         }
@@ -122,10 +122,10 @@ const config = {
         content.appendChild(Tutorials(tutorialPromises));
       }
     }
-    else if (window.location.pathname === '/about/') {
+    else if (window.location.pathname === config.rootPath + 'about/') {
       content.appendChild(About());
     }
-    else if (window.location.pathname === '/projects/redpill/') {
+    else if (window.location.pathname === config.rootPath + 'projects/redpill/') {
       content.appendChild(RedpillView(content));
     }
     else {
@@ -142,7 +142,7 @@ const config = {
 
         const entry = sortedEntries[i];
 
-        if (entry.metadata.entryId === entryId) {
+        if (entry.ext.entryId === entryId) {
           index = i;
           entryName = sortedNames[i];
           entryMeta = entry;
@@ -173,7 +173,7 @@ const config = {
 
 
   async function fetchEntry(name, entryMeta, index) {
-    const metadata = entryMeta.metadata;
+    const metadata = entryMeta.ext;
 
     if (state.promiseEntries[index] === undefined) {
 
@@ -193,7 +193,8 @@ const config = {
       };
 
       // retrieved and rendered first.
-      const contentPromise = fetch(rootDir + '/' + name + '/' + entry.metadata.contentFilename)
+      const fetchUri = rootDir + '/' + name + '/' + entry.metadata.contentFilename;
+      const contentPromise = fetch(fetchUri)
         .then(result => result.text());
 
       const entryPromise = contentPromise

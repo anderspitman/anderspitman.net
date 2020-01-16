@@ -1,8 +1,8 @@
 {
-  "tags": [
-    "tutorial"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "tutorial"
+    ],
     "entryId": 5,
     "title": "How to Install the Google Play Store on Your Amazon Fire Phone",
     "urlName": "how-to-install-the-play-store-on-your-fire-phone",

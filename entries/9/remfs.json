@@ -1,8 +1,8 @@
 {
-  "tags": [
-    "tutorial"
-  ],
-  "appData": {
+  "ext": {
+    "tags": [
+      "tutorial"
+    ],
     "entryId": 9,
     "date": "2018-06-26",
     "title": "Make You a Static Site Generator",
