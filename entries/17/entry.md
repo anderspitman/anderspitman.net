@@ -134,12 +134,6 @@ this post, I put them at the bottom in reference section style. But I'm
 wondering how this is for accessibility. What do visually impaired folks
 prefer?
 
-# Conclusion
-
-There's still more work to be done. I currently have any users with JavaScript
-disabled being HTML-redirected to /txt/feed. This isn't ideal because if they
-were linked to a specific page, they have to find it in the list.
-
 
 [0]: https://anderspitman.net/16/#please-work-with-urls/
 
