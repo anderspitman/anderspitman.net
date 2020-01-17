@@ -64,9 +64,23 @@ for (const item of items) {
 
 }
 
+genIndexPage();
 genFeedPage(entries);
 genAboutPage();
 
+
+function genIndexPage() {
+  const indexPath = path.join(outDir, 'index.html');
+  const partials = {
+    header: headerTemplateText,
+    footer: footerTemplateText,
+  };
+  const rendered = mustache.render(aboutTemplateText, {
+    root,
+  }, partials);
+  fs.writeFileSync(indexPath, rendered);
+  remfsSetWebDir(outDir);
+}
 
 function genAboutPage() {
   const aboutDir = path.join(outDir, 'about');
@@ -135,9 +149,11 @@ function ensureDir(dirPath) {
 
 function remfsSetWebDir(dir) {
   const remfsSettings = {
-    http: {
-      isWebDir: true,
-    },
+    ext: {
+      http: {
+        isWebDir: true,
+      },
+    }
   };
 
   const remfsSettingsPath = path.join(dir, 'remfs.json');
