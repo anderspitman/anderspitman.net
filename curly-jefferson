@@ -1,4 +1,4 @@
-#!/bin/env node
+#!/usr/bin/env node
 
 const process = require('process');
 const fs = require('fs');
@@ -72,7 +72,7 @@ for (const item of items) {
 
   const entryText = fs.readFileSync(entryPath, 'utf8');
   //const htmlText = marked(entryText);
-  const mdPath = path.join(itemPath, 'manfs.json');
+  const mdPath = path.join(itemPath, 'remfs.json');
   const metadata = JSON.parse(fs.readFileSync(mdPath, 'utf8'));
 
   //const entryOutDir = path.join(outDir, item.name);
@@ -87,9 +87,9 @@ for (const item of items) {
   //const entryOutPath = path.join(entryOutDir, 'index.html');
   const entryOutPath = path.join(outDir, item.name);
 
-  const title = metadata.appData.title ? metadata.appData.title : 'Untitled';
+  const title = metadata.ext.title ? metadata.ext.title : 'Untitled';
 
-  const outText = `${header}\n# ${title} (${metadata.appData.date})\n\n${entryText}`
+  const outText = `${header}\n# ${title} (${metadata.ext.date})\n\n${entryText}`
   //fs.writeFileSync(entryOutPath, htmlText);
   fs.writeFileSync(entryOutPath, outText);
 
@@ -118,11 +118,11 @@ function genFeedText(items, entryDir) {
 
     const entryText = fs.readFileSync(entryPath, 'utf8');
     //const htmlText = marked(entryText);
-    const mdPath = path.join(itemPath, 'manfs.json');
+    const mdPath = path.join(itemPath, 'remfs.json');
     const metadata = JSON.parse(fs.readFileSync(mdPath, 'utf8'));
 
-    const title = metadata.appData.title ? metadata.appData.title : 'Untitled';
-    feedText += `* ${title} (${metadata.appData.date})\n  => curl ${host}/txt/${item.name}\n`;
+    const title = metadata.ext.title ? metadata.ext.title : 'Untitled';
+    feedText += `* ${title} (${metadata.ext.date})\n  => curl ${host}/txt/${item.name}\n`;
   }
 
   return feedText;
