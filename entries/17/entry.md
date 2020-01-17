@@ -145,7 +145,7 @@ posts. This will be a bit trickier to get working since my website is currently
 an SPA, but should be a fun challenge.
 
 
-[0]: https://anderspitman.net/16/please-work-with-urls/
+[0]: https://anderspitman.net/16/#please-work-with-urls/
 
 [1]: https://news.ycombinator.com/item?id=22038065 
 
