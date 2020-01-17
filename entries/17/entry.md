@@ -140,10 +140,6 @@ There's still more work to be done. I currently have any users with JavaScript
 disabled being HTML-redirected to /txt/feed. This isn't ideal because if they
 were linked to a specific page, they have to find it in the list.
 
-Also, pure text is cool, but I still need to serve static HTML files of my
-posts. This will be a bit trickier to get working since my website is currently
-an SPA, but should be a fun challenge.
-
 
 [0]: https://anderspitman.net/16/#please-work-with-urls/
 
