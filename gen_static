@@ -6,15 +6,14 @@ const path = require('path');
 const marked = require('./deps/marked/lib/marked.js');
 const mustache = require('./deps/mustache.js/mustache.js');
 
-if (process.argv.length < 6) {
-  console.log("Usage: curly-jefferson entryDir outDir host root");
+if (process.argv.length < 5) {
+  console.log("Usage: curly-jefferson entryDir outDir root");
   process.exit(1);
 }
 
 const entryDir = process.argv[2];
 const outDir = process.argv[3];
-const host = process.argv[4];
-const root = process.argv[5];
+const root = process.argv[4];
 
 try {
   fs.readdirSync(outDir);
