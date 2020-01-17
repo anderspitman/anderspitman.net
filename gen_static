@@ -3,13 +3,18 @@
 const process = require('process');
 const fs = require('fs');
 const path = require('path');
-const marked = require('./lib/marked/marked.js');
+const marked = require('./deps/marked/lib/marked.js');
+const mustache = require('./deps/mustache.js/mustache.js');
 
-const manifestPath = process.argv[2];
-const entryDir = process.argv[3];
-const outDir = process.argv[4];
+if (process.argv.length < 6) {
+  console.log("Usage: curly-jefferson entryDir outDir host root");
+  process.exit(1);
+}
 
-console.log(entryDir, outDir);
+const entryDir = process.argv[2];
+const outDir = process.argv[3];
+const host = process.argv[4];
+const root = process.argv[5];
 
 try {
   fs.readdirSync(outDir);
@@ -18,41 +23,123 @@ catch (e) {
   fs.mkdirSync(outDir);
 }
 
-// TODO: shouldn't have children.entries.children hard-coded here
-const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
-  .children.entries.children;
-console.log(manifest);
+// this is used to achieve a "natural sort". see
+// https://stackoverflow.com/a/38641281/943814
+const naturalSorter = new Intl.Collator(undefined, {
+  numeric: true,
+  sensitivity: 'base'
+});
 
+const aboutTemplateText = fs.readFileSync('about.mustache', 'utf8');
+const headerTemplateText = fs.readFileSync('header.mustache', 'utf8');
+const footerTemplateText = fs.readFileSync('footer.mustache', 'utf8');
+const entryTemplateText = fs.readFileSync('entry.mustache', 'utf8');
 
-//const items = fs.readdirSync(entryDir, { withFileTypes: true });
+const items = fs.readdirSync(entryDir, { withFileTypes: true });
 
-//for (const item of items) {
-for (const itemName in manifest) {
+const entries = [];
+for (const item of items) {
+  const itemPath = path.join(entryDir, item.name);
 
-  const item = manifest[itemName];
+  const mdPath = path.join(itemPath, 'remfs.json');
+  const metadata = JSON.parse(fs.readFileSync(mdPath, 'utf8'));
 
-  const itemPath = path.join(entryDir, itemName);
-  //const stat = fs.statSync(itemPath);
-  
-  const entryPath = path.join(itemPath, 'entry.md');
-
+  const entryPath = path.join(itemPath, metadata.ext.contentFilename);
   const entryText = fs.readFileSync(entryPath, 'utf8');
-  const htmlText = marked(entryText);
 
-  const entryId = String(item.metadata.entryId);
-  console.log(entryId);
+  let content;
+  if (entryText.length < 1024) {
+    content = marked(entryText);
+  }
+  else {
+    content = '';
+  }
+  const entry = {
+    metadata: metadata.ext,
+    content,
+  };
+  entries.push(entry);
 
-  const entryOutDir = path.join(outDir, entryId);
+  genEntryPage(entry, marked(entryText));
 
+}
+
+genFeedPage(entries);
+genAboutPage();
+
+
+function genAboutPage() {
+  const aboutDir = path.join(outDir, 'about');
+  ensureDir(aboutDir);
+  const aboutPath = path.join(aboutDir, 'index.html');
+  const partials = {
+    header: headerTemplateText,
+    footer: footerTemplateText,
+  };
+  const rendered = mustache.render(aboutTemplateText, {
+    root,
+  }, partials);
+  fs.writeFileSync(aboutPath, rendered);
+  remfsSetWebDir(aboutDir);
+}
+
+function genFeedPage(entries) {
+
+  // sort in reverse-chronological order (the key is the entry id, which
+  // increases monotonically).
+  const sortedEntries = entries.slice()
+    .sort((a, b) => naturalSorter.compare(a.metadata.entryId, b.metadata.entryId))
+    .reverse();
+
+  const feedTemplateText = fs.readFileSync('feed.mustache', 'utf8');
+  const partials = {
+    header: headerTemplateText,
+    footer: footerTemplateText,
+    entry: entryTemplateText,
+  };
+  const rendered = mustache.render(feedTemplateText, {
+    root,
+    posts: sortedEntries,
+  }, partials);
+  ensureDir('feed');
+  fs.writeFileSync(path.join('feed', 'index.html'), rendered);
+  remfsSetWebDir('feed');
+}
+
+function genEntryPage(entry, fullContent) {
+  const entryIndexTemplateText = fs.readFileSync('entry_index.mustache', 'utf8');
+  const partials = {
+    header: headerTemplateText,
+    footer: footerTemplateText,
+    entry: entryTemplateText,
+  };
+  const rendered = mustache.render(entryIndexTemplateText, {
+    root,
+    metadata: entry.metadata,
+    content: fullContent,
+  }, partials);
+  const entryDir = String(entry.metadata.entryId);
+  ensureDir(entryDir);
+  fs.writeFileSync(path.join(entryDir, 'index.html'), rendered);
+  remfsSetWebDir(entryDir);
+}
+
+function ensureDir(dirPath) {
   try {
-    fs.readdirSync(entryOutDir);
+    fs.readdirSync(dirPath);
   }
   catch (e) {
-    fs.mkdirSync(entryOutDir);
+    fs.mkdirSync(dirPath);
   }
-
-  const entryOutPath = path.join(entryOutDir, 'index.html');
-
-  fs.writeFileSync(entryOutPath, htmlText);
 }
-       
+
+function remfsSetWebDir(dir) {
+  const remfsSettings = {
+    http: {
+      isWebDir: true,
+    },
+  };
+
+  const remfsSettingsPath = path.join(dir, 'remfs.json');
+  fs.writeFileSync(remfsSettingsPath, JSON.stringify(remfsSettings, null, 2));
+}

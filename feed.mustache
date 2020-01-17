@@ -1,0 +1,22 @@
+{{> header}}
+
+<div class='feed'>
+  <div class='entry-list'>
+  {{#posts}}
+    <div class='entry-list__entry'>
+      <div class='list-entry'>
+        <div class='list-entry__controls'>
+          <span class='list-entry__id'>#{{metadata.entryId}}</span>
+          <span>{{metadata.date}}</span>
+          <a href='{{{root}}}{{metadata.entryId}}' target='_blank' id='open-in-tab-btn' class='list-entry__control-btn'>Open in Tab</a>
+          <a href='{{{root}}}{{metadata.entryId}}' id='fullscreen-btn' class='list-entry__control-btn'>Fullscreen</a>
+
+        </div>
+        {{> entry}}
+      </div>
+    </div>
+  {{/posts}}
+  </div>
+</div>
+
+{{> footer}}

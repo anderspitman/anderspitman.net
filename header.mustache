@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Anders' little corner of the internet</title>
 
-    <link rel="stylesheet" href="./deps/highlight.js/src/styles/tomorrow-night.css">
-    <link rel="stylesheet" href="./theme.css">
+    <link rel="stylesheet" href="{{{root}}}deps/highlight.js/src/styles/tomorrow-night.css">
+    <link rel="stylesheet" href="{{{root}}}theme.css">
 
     <!-- Google Analytics -->
     <script>
@@ -26,17 +26,11 @@
   </head>
 
   <body>
-    <div id='rain-container'></div>
-    <div id='root'></div>
-    <script src='./deps/marked/lib/marked.js'></script>
-    <script src='./deps/highlight.js/src/highlight.js'></script>
 
-    <!-- Start preload for performance -->
-    <script type='module' src='./components/core.js'></script>
-    <script type='module' src='./components/tutorials.js'></script>
-    <script type='module' src='./components/about.js'></script>
-    <!-- End preload for performance -->
+    <div class='main'>
+      <nav class='semi-transparent'>
+        <a class='nav-btn' href='{{root}}feed'>Feed</a>
+        <!--<a class='nav-btn' href='{{root}}tutorials'>Tutorials</a>-->
+        <a class='nav-btn' href='{{root}}about'>About</a>
+      </nav>
 
-    <script type='module' src='./index.js'></script>
-  </body>
-</html>

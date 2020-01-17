@@ -7,3 +7,6 @@
 [submodule "deps/redpill"]
 	path = deps/redpill
 	url = https://github.com/anderspitman/redpill
+[submodule "deps/mustache.js"]
+	path = deps/mustache.js
+	url = https://github.com/janl/mustache.js
