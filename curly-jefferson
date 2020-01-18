@@ -5,16 +5,15 @@ const fs = require('fs');
 const path = require('path');
 //const marked = require('./deps/marked/lib/marked.js');
 
-if (process.argv.length < 5) {
-  console.log("Usage: curly-jefferson entryDir outDir host");
+if (process.argv.length < 6) {
+  console.log("Usage: curly-jefferson entryDir outDir host txtHost");
   process.exit(1);
 }
 
 const entryDir = process.argv[2];
 const outDir = process.argv[3];
-const host = process.argv[4];
-
-const httpHost = 'https://' + host;
+const httpHost = process.argv[4];
+const txtHost = process.argv[5];
 
 try {
   fs.readdirSync(outDir);
@@ -44,9 +43,9 @@ client will work. If you're looking for a specific post, check the list on the
 Feed page.
 
 * Feed
-  ${genCommands('/txt/feed', host, httpHost)}
+  ${genCommands('/txt/feed', httpHost, txtHost)}
 * About
-  ${genCommands('/txt/about', host, httpHost)}
+  ${genCommands('/txt/about', httpHost, txtHost)}
 `;
 
 const aboutText = 
@@ -125,15 +124,15 @@ function genFeedText(items, entryDir) {
     const metadata = JSON.parse(fs.readFileSync(mdPath, 'utf8'));
 
     const title = metadata.ext.title ? metadata.ext.title : 'Untitled';
-    feedText += `* ${title} (${metadata.ext.date})\n  ${genCommands('/txt/' + item.name, host, httpHost)}\n`;
+    feedText += `* ${title} (${metadata.ext.date})\n  ${genCommands('/txt/' + item.name, httpHost, txtHost)}\n`;
   }
 
   return feedText;
 }
 
-function genCommands(path, host, httpHost) {
+function genCommands(path, httpHost, txtHost) {
   const template = `| curl ${httpHost}${path}
-  | nc ${host} 3838 <<< ${path}
+  | nc ${txtHost} 3838 <<< ${path}
 `;
   return template;
 }
