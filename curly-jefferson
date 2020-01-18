@@ -33,6 +33,7 @@ const naturalSorter = new Intl.Collator(undefined, {
 
 
 const header = `
+-------------------------------------------------------------------------------
 # Navigation
 
 You're on the text version of this site.  The rich web version is available at:
@@ -50,6 +51,7 @@ to ensure privacy.
   ${genCommands('/txt/feed', httpHost, txtHost)}
 * About
   ${genCommands('/txt/about', httpHost, txtHost)}
+-------------------------------------------------------------------------------
 `;
 
 const aboutText = 
