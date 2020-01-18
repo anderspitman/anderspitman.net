@@ -37,10 +37,14 @@ const header = `
 
 You're on the text version of this site.  The rich web version is available at:
 ${httpHost}
+
 To navigate, paste one of the URLs into your browser, or the entire command
 into your terminal. The examples use cURL and netcat, but any HTTP or TCP
 client will work. If you're looking for a specific post, check the list on the
 Feed page.
+
+Note that the raw TCP connections are NOT encrypted. Use HTTPS if you want
+to ensure privacy.
 
 * Feed
   ${genCommands('/txt/feed', httpHost, txtHost)}
