@@ -1,3 +1,9 @@
+# Current static version
+
+* Fix code highlighting
+
+# Old JS version
+
 * Add deep-links to headings
 * Add a "to-top" button to headings
 * Preload portrait image
