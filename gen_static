@@ -5,6 +5,16 @@ const fs = require('fs');
 const path = require('path');
 const marked = require('./deps/marked/lib/marked.js');
 const mustache = require('./deps/mustache.js/mustache.js');
+const hljs = require('highlight.js');
+
+marked.setOptions({
+  highlight: function(code, lang) {
+    const highlighted = hljs.highlightAuto(code);
+    //const highlighted = hljs.highlight('html', code);
+    //console.log(highlighted);
+    return highlighted.value;
+  },
+});
 
 if (process.argv.length < 5) {
   console.log("Usage: curly-jefferson entryDir outDir root");

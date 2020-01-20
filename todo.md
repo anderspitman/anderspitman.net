@@ -1,6 +1,8 @@
 # Current static version
 
 * Fix code highlighting
+* Switch to p38.me or similar
+* Add newsletter
 
 # Old JS version
 
