@@ -1,0 +1,14 @@
+{
+  "ext": {
+    "tags": [
+      "netcat",
+      "simplicity"
+    ],
+    "entryId": 19,
+    "title": "This site is now browsable with netcat/raw TCP",
+    "date": "2020-01-20",
+    "urlName": "netcatable",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}
