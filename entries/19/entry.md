@@ -19,6 +19,9 @@ It uses an extremely simple protcol. You can use any TCP client. Just open a
 TCP connection to txt.anderspitman.net on port 3838, write a path in plaintext,
 and it will return the contents if found. I call it the newb protocol.
 
+Note that newb connections are **not encrypted**. If you want private browsing,
+you'll need to use HTTPS, either with cURL or a browser.
+
 If you don't have netcat, it's simple to write a newb client in your favorite
 language. Here's one in node:
 
