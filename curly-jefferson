@@ -137,8 +137,8 @@ function genFeedText(items, entryDir) {
 }
 
 function genCommands(path, httpHost, txtHost) {
-  const template = `| curl ${httpHost}${path}
-  | nc ${txtHost} 3838 <<< ${path}
+  const template = `  curl ${httpHost}${path}
+    nc ${txtHost} 3838 <<< ${path}
 `;
   return template;
 }

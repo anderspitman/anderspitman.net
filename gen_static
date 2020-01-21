@@ -162,6 +162,14 @@ function remfsSetWebDir(dir) {
       http: {
         isWebDir: true,
       },
+    },
+    perms: {
+      readers: [
+        'public',
+      ],
+      owners: [
+        'tapitman11@gmail.com',
+      ],
     }
   };
 
