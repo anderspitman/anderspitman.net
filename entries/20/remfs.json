@@ -1,0 +1,13 @@
+{
+  "ext": {
+    "tags": [
+      "analytics"
+    ],
+    "entryId": 20,
+    "title": "Get yourself off Google Analytics, in 5 minutes, for free, without self hosting",
+    "date": "2020-01-28",
+    "urlName": "get-off-google-analytics",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}
