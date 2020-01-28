@@ -59,6 +59,23 @@ options, or at least sending a few $ their way. The internet needs more
 services like this. I'm not affiliated with GoatCounter in any way; just a
 happy customer.
 
+
+# Caveats
+
+None of the GA alternatives I've seen have all the features GA offers.
+Personally, I realized that I only ever look at the basics anyway. I want to
+know how many people are visiting my site, where they are coming from, which
+pages they are visiting, and some basic device information.
+
+You can go down a deep rabbit hole of analyzing how users navigate your site,
+where they click, where they drop off, etc, etc. But in my opinion, many of
+these paths lead to you manipulating your users into using your site the way
+you want them to. If you have good content, people will read your site. If you
+have a good product that solves a real problem, people will buy it. Sure, you
+should follow good design principles to make your site usable, but no amount of
+design can fix a site that doesn't offer any value.
+
+
 # Addendum
 
 It's funny how sometimes we use things in subtly different ways because of a
@@ -71,7 +88,7 @@ mobile browser, based on it's desktop performance and the performance of other
 Google products. I imagine it would be slow and painful. My subconscious had
 ruled it out before I ever even considered it. GoatCounter gives the exact
 opposite impression. It screams simplicity and performance, just begging
-to be used on an extra level smartphone.
+to be used on an entry-level smartphone.
 
 
 # Appendix A - Server logs vs SaaS analytics
