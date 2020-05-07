@@ -1,0 +1,13 @@
+{
+  "ext": {
+    "tags": [
+      "virtual dom", "80/20", "frameworks", "javascript"
+    ],
+    "entryId": 22,
+    "title": "Yearnings for a Production-Quality JavaScript Framework",
+    "date": "2020-05-07",
+    "urlName": "production-quality-js-framework",
+    "format": "github-flavored-markdown",
+    "contentFilename": "entry.md"
+  }
+}
