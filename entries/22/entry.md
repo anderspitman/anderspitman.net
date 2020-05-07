@@ -16,12 +16,12 @@ We try to keep things updated, but our subconscious minds have learned that
 this is almost always a painful process, so we avoid it even when we know we
 shouldn't.
 
-Here's my take. I think reactive UIs is the big idea. Any reasonably
+Here's my take. I think reactive UI is the big idea. Any reasonably
 well-designed framework with a virtual DOM or equivalent (ie Svelte, Flutter),
-which enables a immediate-mode mental model for building UIs, gets you 80% of
+which enables an immediate-mode mental model for building UIs, gets you 80% of
 the way there. But I get the feeling that React and Vue are competing for that
-last 20%, and the result is a lot of breaking changes for minimal value to
-developers.
+last 20%, and the result is a lot of breaking changes with diminishing returns
+in value to developers.
 
 Even my personal favorite vdom framework for side projects, [Mithril][0],
 bumped to version 2 a while back which caused breaking changes for my code. I
