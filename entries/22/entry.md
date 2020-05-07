@@ -9,8 +9,8 @@ Our GitHub repos are constantly barraged with Dependabot warnings and pull
 requests concerning security vulnerabilities deep in our dependency tree. One
 of our apps is stuck on node 10 because the Webpack/Vue build process is
 failing for some reason we haven't had time to diagnose. Running `npm outdated`
-on any of our projects never makes you feel good. And when the UI abstractions
-themselves start to leak, it can be down-right disheartening[<sup>0</sup>](#0).
+on any of our projects never makes you feel good. And when the framework abstractions
+themselves start to leak, it can be down-right disheartening<a id='note0ref' href='#note0'><sup>0</sup></a>.
 
 We try to keep things updated, but our subconscious minds have learned that
 this is almost always a painful process, so we avoid it even when we know we
@@ -18,10 +18,10 @@ shouldn't.
 
 Here's my take. I think reactive UIs is the big idea. Any reasonably
 well-designed framework with a virtual DOM or equivalent (ie Svelte, Flutter),
-which enables a reactive, immediate-mode mental model for building UIs, gets
-you 80% of the way there. But I get the feeling that React and Vue are
-competing for that last 20%, and the result is a lot of breaking changes for
-minimal value to developers.
+which enables a immediate-mode mental model for building UIs, gets you 80% of
+the way there. But I get the feeling that React and Vue are competing for that
+last 20%, and the result is a lot of breaking changes for minimal value to
+developers.
 
 Even my personal favorite vdom framework for side projects, [Mithril][0],
 bumped to version 2 a while back which caused breaking changes for my code. I
@@ -44,10 +44,12 @@ I'm going to find this framework, and I'm going to
 admire it from a distance, because my team is all-in on Vue at this point and I
 don't think there's any going back.
 
-<div id="1">
-  For any of you who may not have yet had the experiences that teach you when
-  it's necessary to use Object.freeze on your Vue state, when you finally do,
-  know that you're not alone and feel to reach out to me for emotional support.
-<div>
+# Footnotes
+
+<a id='note0' href='#note0ref'><sup>0</sup></a>
+For any of you who may not have had the experiences that teach you when it's
+necessary to use Object.freeze on portions of your Vue state, if you do at some
+point, know that you're not alone and feel free to reach out to me for
+emotional support.
 
 [0]: https://mithril.js.org/
